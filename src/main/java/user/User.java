@@ -3,17 +3,19 @@ package user;
 public class User {
     public static String ATTRIBUTE_NAME = "user";
     private String userName;
-    private String fullName;
+    private int id;
+    private String email;
     private boolean isAdmin;
 
-    public User(String userName, String fullName, boolean isAdmin) {
+    public User(int id, String userName, String email, boolean isAdmin) {
         this.userName = userName;
-        this.fullName = fullName;
+        this.email = email;
         this.isAdmin = isAdmin;
+        this.id = id;
     }
 
-    public String getName() {
-        return fullName;
+    public String getEmail() {
+        return email;
     }
 
     public String getUserName() {
@@ -24,5 +26,5 @@ public class User {
         return isAdmin;
     }
 
-
+    public int getId() {return id;}
 }

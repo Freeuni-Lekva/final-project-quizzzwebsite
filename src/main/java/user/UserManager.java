@@ -27,7 +27,7 @@ public class UserManager {
             rs = statement.executeQuery();
             if(rs.next()) {
                 if(rs.getString(3).equals(computeHash(password))) {
-                    user = new User(rs.getString("userName"), rs.getString(2), rs.getBoolean(5));
+                    user = new User(rs.getInt(1) ,rs.getString("userName"), rs.getString(2), rs.getBoolean(5));
                 }
             }
         } catch (Exception e) {
@@ -80,7 +80,7 @@ public class UserManager {
             statement.setString(1, "%" + userName + "%");
             rs = statement.executeQuery();
             while(rs.next()) {
-                res.add(new User(rs.getString("userName"), rs.getString("userName"), rs.getBoolean("isAdmin")));
+                res.add(new User(rs.getInt(1) ,rs.getString("userName"), rs.getString("email"), rs.getBoolean("isAdmin")));
             }
         } catch (Exception e) {
             e.printStackTrace();
