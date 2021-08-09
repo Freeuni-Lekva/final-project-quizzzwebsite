@@ -31,8 +31,6 @@ public class UserManager {
                     user = new User(rs.getInt(1) ,rs.getString("userName"), rs.getString(2), rs.getBoolean(5));
                 }
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
@@ -56,8 +54,6 @@ public class UserManager {
             statement.setBoolean(4, false);
             statement.executeUpdate();
             user = getUser(email, password);
-        } catch (Exception e) {
-            throw e;
         } finally {
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
@@ -83,8 +79,6 @@ public class UserManager {
             while(rs.next()) {
                 res.add(new User(rs.getInt(1) ,rs.getString("userName"), rs.getString("email"), rs.getBoolean("isAdmin")));
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
@@ -107,8 +101,6 @@ public class UserManager {
                 res = true;
             }
 
-        } catch (Exception e) {
-            throw e;
         } finally {
             try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
@@ -128,8 +120,6 @@ public class UserManager {
             if(rs.next()) {
                 result = true;
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
