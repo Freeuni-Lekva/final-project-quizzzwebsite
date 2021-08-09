@@ -27,7 +27,7 @@
                     </ul>
                 </div>
             </li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="AboutUs.jsp">About Us</a></li>
             <li><a href="Welcome.jsp">Sign out</a></li>
         </ul>
     </div>
