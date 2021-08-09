@@ -6,6 +6,7 @@ import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class UserManager {
     private static Connection con;
 
 
-    public static User getUser(String email, String password) {
+    public static User getUser(String email, String password) throws SQLException {
         if(!emailRegistered(email)) {
             return null;
         }
@@ -31,7 +32,7 @@ public class UserManager {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         } finally {
             try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
@@ -40,7 +41,7 @@ public class UserManager {
         return user;
     }
 
-    public static User registerUser(String userName, String email, String password) {
+    public static User registerUser(String userName, String email, String password) throws SQLException{
         if(emailRegistered(email) || userNameUsed(userName) || password == null) {
             return null;
         }
@@ -56,7 +57,7 @@ public class UserManager {
             statement.executeUpdate();
             user = getUser(email, password);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         } finally {
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
@@ -69,7 +70,7 @@ public class UserManager {
         return false;
     }
 
-    public static List<User> searchUsers(String userName) {
+    public static List<User> searchUsers(String userName) throws SQLException {
         List<User> res = new ArrayList<>();
         if(userName.length()<4) return res;
         ResultSet rs = null;
@@ -83,7 +84,7 @@ public class UserManager {
                 res.add(new User(rs.getInt(1) ,rs.getString("userName"), rs.getString("email"), rs.getBoolean("isAdmin")));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         } finally {
             try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
@@ -93,7 +94,7 @@ public class UserManager {
     }
 
 
-    private static boolean emailRegistered(String email) {
+    private static boolean emailRegistered(String email) throws SQLException{
         boolean res = false;
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -107,7 +108,7 @@ public class UserManager {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         } finally {
             try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
@@ -115,8 +116,26 @@ public class UserManager {
         }
         return res;
     }
-    private static boolean userNameUsed(String userName) {
-        return false;
+    private static boolean userNameUsed(String userName) throws SQLException {
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        boolean result = false;
+        try {
+            con = DataSrc.getConnection();
+            statement = con.prepareStatement("select * from users where userName = ?");
+            statement.setString(1, userName);
+            rs = statement.executeQuery();
+            if(rs.next()) {
+                result = true;
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
+        }
+        return result;
     }
 
     private static String computeHash(String arg) {
