@@ -8,7 +8,7 @@
 <div class="container">
     <form action="RegistrationServlet" method="post">
         <label class="Registration">Please Try Again!</label><br>
-        <input type="text" id="name" name="fullname" placeholder="Enter Fullname">
+        <input type="text" id="name" name="username" placeholder="Enter Username">
 
         <input type="email" id="email" name="email" placeholder="Enter Email">
 
