@@ -1,0 +1,152 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+body{
+    background-image: url("project3.jpg");
+    background-position: center;
+    background-size: cover;
+    box-sizing: border-box;
+    font-family: fantasy;
+}
+
+.Homepage-bar{
+    background: cornflowerblue;
+    align-items: center;
+    overflow: hidden;
+}
+
+.Homepage-bar ul{
+    display: inline-flex;
+    color: white;
+    list-style: none;
+}
+
+.Homepage-bar ul li{
+    margin-left: 6vw;
+    margin-top: 2vh;
+    margin-bottom:2vh;
+    margin-right: 5.5vw;
+
+
+}
+
+
+.Homepage-bar ul li:last-child{
+    margin-right: 2vw;
+}
+
+
+.Homepage-bar ul li a{
+    text-decoration: none;
+    color:white;
+
+
+}
+
+.info{
+    display:none;
+}
+
+.Homepage-bar ul li:hover .info {
+    display:block;
+    background: cornflowerblue;
+    position: absolute;
+
+
+}
+.Homepage-bar ul li:hover .info ul{
+    display:block;
+
+
+}
+
+.Homepage-bar ul li:hover .info ul li a:hover{
+    color: black;
+
+}
+
+
+
+
+.quizzes{
+    display:none;
+
+}
+
+.Homepage-bar ul li:hover .quizzes {
+    display:block;
+    background: cornflowerblue;
+    position: absolute;
+
+
+}
+.Homepage-bar ul li:hover .quizzes ul{
+    display:block;
+    margin:3vh 0.5vw;
+
+}
+
+.Homepage-bar ul li:hover .quizzes ul li a:hover{
+    color: black;
+}
+
+.box{
+    width:65vw;
+    height:75vh;
+    overflow: scroll;
+    background: ghostwhite;
+    border-radius: 10%;
+    align-items: center;
+    display: block;
+    color: black;
+    margin-left:20vw;
+    margin-top:8vh;
+    margin-bottom: 5vh;
+    margin-right: 10vw;
+
+}
+
+.box h2{
+    font-family: Arial;
+    text-decoration-line: underline blink;
+    color:black;
+    font-size: xxx-large;
+    margin-top:3%;
+    margin-left:5%;
+    margin-bottom: 2%;
+
+}
+
+.box p{
+    font-family: Arial;
+    color:black;
+    margin-top:2%;
+    margin-left:5%;
+    margin-bottom: 2%;
+    font-size: medium;
+
+}
+
+.box label{
+    font-family: Arial;
+    color:black;
+    margin-top:1%;
+    margin-left:5%;
+    margin-bottom: 5%;
+    font-size: small;
+    padding: 0;
+}
+
+.box h5{
+    font-family: Arial;
+    color:black;
+    margin-top:5%;
+    margin-left:5%;
+    margin-bottom: 2%;
+    font-size: small;
+    text-decoration-line: underline blink;
+
+
+}
