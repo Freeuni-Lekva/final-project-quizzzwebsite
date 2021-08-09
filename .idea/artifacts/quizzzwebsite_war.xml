@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="quizzzwebsite-1.0-SNAPSHOT.war">
+    <root id="archive" name="students.war">
       <element id="artifact" artifact-name="quizzzwebsite:war exploded" />
     </root>
   </artifact>

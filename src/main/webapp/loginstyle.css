@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+body{
+    background-image: url("project3.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.Welcome{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+
+}
+
+
+.Sign-in-box{
+    width: 25vw;
+    height: 40vh;
+    background-color: azure;
+    overflow: scroll;
+    border-radius: 25% 10%;
+    position: relative;
+    margin : 25vh 10vw 35vh 65vw;
+
+}
+
+
+
+.Sign-in-box input{
+    width: 21vw;
+    height: 5vh ;
+    background-color: white;
+    color: black;
+    font-size: small;
+    padding: 8px 0;
+    margin: 8% 1vw 2% 3vw;
+
+
+}
+
+
+.Sign-in{
+    width: 21vw;
+    height: 5vh ;
+    overflow: hidden;
+    position: relative;
+    background-color: cornflowerblue;
+    margin: 8% 1vw 2% 3vw;
+    cursor:pointer;
+    transition:0.3s ease-in-out;
+    color:black;
+}
+
+.send-button:active{
+    transform: scale(0.9);
+}
+
+.Sign-in-box a{
+    margin: 4% 30%;
+
+
+}
+
+.Sign-in-box label{
+    font-weight:bold;
+    font-family: fantasy;
+    color:black;
+    font-size: large;
+    margin: 10% 0.5vw 4% 7vw;
+}
