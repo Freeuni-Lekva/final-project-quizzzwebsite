@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+body{
+    background-image: url("project3.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.container{
+    width: 25vw;
+    height: 45vh;
+    background-color: azure;
+    overflow: scroll;
+    border-radius: 10%;
+    position: relative;
+    margin : 15vh 10vw 40vh 65vw;
+}
+
+.container input{
+    display: block;
+    width: 21vw;
+    height: 5vh ;
+    background-color: white;
+    color: black;
+    font-size: small;
+    padding: 0;
+    margin: 8% 2vw 2% 2vw;
+}
+
+.register{
+    width: 21vw;
+    height: 5vh ;
+    overflow: hidden;
+    position: relative;
+    background-color: cornflowerblue;
+    margin: 8% 2vw 2% 2vw;
+    cursor:pointer;
+    transition:0.3s ease-in-out;
+    color:black;
+}
+
+.register:active{
+    transform: scale(0.5);
+}
+
+.Registration{
+    font-weight:bold;
+    font-family: fantasy;
+    color:black;
+    font-size: large;
+    margin: 10% 2vw 4% 6vw;
+}
+
+
+.container a{
+    margin: 10% 40%;
+
+
+}
