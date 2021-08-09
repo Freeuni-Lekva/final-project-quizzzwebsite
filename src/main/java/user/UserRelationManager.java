@@ -5,13 +5,14 @@ import DBConnect.DataSrc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserRelationManager {
     private static Connection con;
 
-    public static boolean sendRequest(String sender, String receiver) {
+    public static boolean sendRequest(String sender, String receiver) throws SQLException {
         if(!userExists(sender) || !userExists(receiver) || isRequestSent(sender,receiver)) {
             return false;
         }
@@ -22,16 +23,13 @@ public class UserRelationManager {
             statement.setString(1, sender);
             statement.setString(2, receiver);
             statement.setTimestamp(3, date);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         } finally {
             try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
         }
         return true;
     }
 
-    private static boolean userExists(String userName) {
+    private static boolean userExists(String userName) throws SQLException {
         ResultSet rs = null;
         PreparedStatement statement = null;
         boolean result = false;
@@ -43,8 +41,6 @@ public class UserRelationManager {
             if(rs.next()) {
                 result = true;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
@@ -53,7 +49,7 @@ public class UserRelationManager {
         return result;
     }
 
-    public static boolean removeRequest(String sender, String receiver) {
+    public static boolean removeRequest(String sender, String receiver) throws SQLException{
         if(!userExists(sender) || !userExists(receiver) || !isRequestSent(sender, receiver)) {
             return false;
         }
@@ -64,16 +60,13 @@ public class UserRelationManager {
             statement.setString(1,sender);
             statement.setString(2, receiver);
             statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         } finally {
             try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
         }
         return true;
     }
 
-    public static boolean addFriendship(String userName1, String userName2) {
+    public static boolean addFriendship(String userName1, String userName2) throws SQLException {
         if(!userExists(userName1) || !userExists(userName2)) {
             return false;
         }
@@ -84,9 +77,6 @@ public class UserRelationManager {
             statement.setString(1, userName1);
             statement.setString(2, userName2);
             statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         } finally {
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
@@ -94,7 +84,7 @@ public class UserRelationManager {
         return true;
     }
 
-    public static boolean removeFriendship(String userName1, String userName2) {
+    public static boolean removeFriendship(String userName1, String userName2) throws SQLException {
         if(!areFriends(userName1, userName2)) {
             return false;
         }
@@ -105,16 +95,13 @@ public class UserRelationManager {
             statement.setString(1,userName1);
             statement.setString(2, userName2);
             statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         } finally {
             try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
         }
         return true;
     }
 
-    public static List<String> getFriendList(String userName) {
+    public static List<String> getFriendList(String userName) throws SQLException {
         List<String> result = new ArrayList<>();
         ResultSet rs = null;
         PreparedStatement statement = null;
@@ -134,8 +121,6 @@ public class UserRelationManager {
             while(rs.next()) {
                 result.add(rs.getString(1));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
@@ -145,11 +130,28 @@ public class UserRelationManager {
         return result;
     }
 
-    public static List<String> getReceivedRequestList(String userName) {
-        return null;
+    public static List<String> getReceivedRequestList(String userName) throws SQLException {
+        List<String> result = new ArrayList<>();
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        try {
+            con = DataSrc.getConnection();
+            statement = con.prepareStatement("select from friendshipRequests where requesteeUsername = ?");
+            statement.setString(1, userName);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                result.add(rs.getString(1));
+            }
+        } finally {
+            try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
+        }
+
+        return result;
     }
 
-    public static boolean isRequestSent(String sender, String receiver) {
+    public static boolean isRequestSent(String sender, String receiver) throws SQLException {
         ResultSet rs = null;
         PreparedStatement statement = null;
         boolean result = false;
@@ -162,8 +164,6 @@ public class UserRelationManager {
             if(rs.next()) {
                 result = true;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
@@ -172,7 +172,7 @@ public class UserRelationManager {
         return result;
     }
 
-    public static boolean areFriends(String userName1, String userName2) {
+    public static boolean areFriends(String userName1, String userName2) throws SQLException{
         ResultSet rs = null;
         PreparedStatement statement = null;
         boolean result = false;
@@ -194,8 +194,6 @@ public class UserRelationManager {
             if(rs.next()) {
                 result = true;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
