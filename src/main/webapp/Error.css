@@ -1,0 +1,46 @@
+*{
+    padding: 0;
+    margin:0;
+
+}
+body{
+
+    background-image: url("error2.jpg");
+    background-position: center;
+    background-size: cover;
+    box-sizing: border-box;
+    font-family: fantasy;
+
+
+}
+.text {
+    width:22vw;
+    height:20vh;
+    margin-left: 70vw;
+    margin-right: 3vw;
+    margin-top:10vh;
+    background: cornflowerblue;
+    border-radius: 8px;
+}
+
+.text h1{
+    text-align: center;
+    font-size: 4vh;
+    color: snow;
+    text-decoration-style: solid;
+
+}
+
+.text a:hover{
+    text-decoration: none;
+
+
+
+}
+
+.text a{
+    font-size: 2vh;
+    text-decoration-line: underline blink;
+    color:wheat;
+    margin-left:2vw;
+}
