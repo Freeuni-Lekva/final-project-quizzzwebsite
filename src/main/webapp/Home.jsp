@@ -8,8 +8,7 @@
 <body>
 
 <div class="Homepage-bar">
-
-        <ul>
+    <ul>
             <li><a href="Home.jsp">Home</a>
             <li><a href="#">Personal Info</a>
                 <div class="info">
