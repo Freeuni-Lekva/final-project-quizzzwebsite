@@ -49,8 +49,12 @@
                 request.getRequestDispatcher("Error.jsp?id=\"Friends.jsp\"");
             }
             if(friends!=null) {
-                for (String curr : friends) {
-                    out.println("<li><a href=\"FriendsProfile.jsp?id=" + curr + "\">" + curr + "</a><button type=\"submit\" id=" + curr + "\">Remove</button></li>");
+                if(friends.size()!=0) {
+                    for (String curr : friends) {
+                        out.println("<li><a href=\"FriendsProfile.jsp?id=" + curr + "\">" + curr + "</a><button type=\"submit\" id=" + curr + "\">Remove</button></li>");
+                    }
+                }else{
+                    out.println("<li>"+"No friends"+"</li>");
                 }
             }
         %>
