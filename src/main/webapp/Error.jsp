@@ -1,7 +1,6 @@
-<%@ page import="chat.User" %>
-<%@ page import="chat.Message" %>
+
 <%@ page import="java.util.List" %>
-<%@ page import="chat.ChatDao" %>
+
 <%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
