@@ -23,6 +23,9 @@ public class ChatManagerTester {
             System.out.print("txt:"+tmp.getMessage()+" ");
             System.out.println(tmp.getTime());
         }
+        assertTrue(messageList.get(0).getSender().equals("Gio"));
+        assertTrue(messageList.get(1).getMessage().equals("hello!!"));
+        assertTrue(messageList.get(3).getReceiver().equals("Nika"));
         ChatManager.clearTable();
     }
 
@@ -38,6 +41,9 @@ public class ChatManagerTester {
         for(Message tmp:messageList){
             System.out.println(tmp.getSender()+":"+tmp.getMessage());
         }
+        assertTrue(messageList.get(0).getSender().equals("Nika") && messageList.get(1).getSender().equals("Nika"));
+        assertTrue(messageList.get(1).getMessage().equals("how are you?"));
+        assertTrue(messageList.get(2).getSender().equals("Gio"));
         ChatManager.clearTable();
     }
 
@@ -53,6 +59,8 @@ public class ChatManagerTester {
         for(Message tmp:messageList){
             System.out.println(tmp.getSender()+":"+tmp.getMessage());
         }
+        assertTrue(messageList.size()==1);
+        assertTrue(messageList.get(0).getSender().equals("Gio"));
         ChatManager.clearTable();
     }
 
