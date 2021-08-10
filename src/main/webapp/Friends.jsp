@@ -1,12 +1,13 @@
 <%@ page import="user.User" %>
+<%@ page import="java.util.List" %>
 <%@ page import="user.UserRelationManager" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <html>
 <head>
-    <title>Profile</title>
-    <link rel="stylesheet" href="Profilestyle.css" >
+    <title>Friends</title>
+    <link rel="stylesheet" href="Friends.css" >
 </head>
 <body>
 
@@ -35,28 +36,37 @@
     </ul>
 </div>
 
-<div class="profile">
-    <h1><%
-        User tmp= (User) request.getSession().getAttribute(User.ATTRIBUTE_NAME);
-        out.println(tmp.getUserName());
-    %></h1>
-    <label>Ranking: </label><br>
-    <label>Total Score: </label><br>
-    <label>Number Of Created Quizzes: </label><br>
-    <label>Number of Written Quizzes: </label><br>
-    <label>Number of Friends: <%
-        User t= (User) request.getSession().getAttribute(User.ATTRIBUTE_NAME);
-        try {
-            out.println(UserRelationManager.getFriendList(t.getUserName()).size());
-        } catch (SQLException throwables) {
-            request.getRequestDispatcher("Error.jsp?id=\"Profile.jsp\"");
-        }
+<div class="friends-bar">
+    <ul>
 
-    %></label><br>
-    <label>Achievements : </label><br>
+        <%
+
+            User tmp= (User) request.getSession().getAttribute(User.ATTRIBUTE_NAME);
+
+            List<String> friends = null;
+            try {
+                friends = UserRelationManager.getFriendList(tmp.getUserName());
+            } catch (SQLException throwables) {
+                request.getRequestDispatcher("Error.jsp?id=\"Friends.jsp\"");
+            }
+            if(friends!=null) {
+                for (String curr : friends) {
+                    out.println("<li><a href=\"FriendsProfile.jsp?id=" + curr + "\">" + curr + "</a><button type=\"submit\" id=" + curr + "\">Remove</button></li>");
+                }
+            }
+        %>
+    </ul>
+
 </div>
 
+<div class="search">
+    <form >
+        <input type="text" placeholder="Search Friend"/>
+        <button type="submit"  >Search</button>
 
+    </form>
+
+</div>
 
 </body>
 </html>

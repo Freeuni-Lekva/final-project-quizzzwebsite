@@ -14,12 +14,12 @@
             <li><a href="#">Personal Info</a>
                 <div class="info">
                     <ul>
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Friends</a></li>
+                        <li><a href="Profile.jsp">Profile</a></li>
+                        <li><a href="Friends.jsp">Friends</a></li>
                     </ul>
                 </div>
             </li>
-            <li><a href="Chat.jsp"> Chat</a></li>
+            <li><a href="#"> Chat</a></li>
             <li><a href="#">Quizzes</a>
                 <div class="quizzes">
                     <ul>

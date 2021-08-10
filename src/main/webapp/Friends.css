@@ -1,0 +1,178 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+body{
+    background-image: url("project3.jpg");
+    background-position: center;
+    background-size: cover;
+    box-sizing: border-box;
+    font-family: fantasy;
+}
+
+.Homepage-bar{
+    background: cornflowerblue;
+    align-items: center;
+    overflow: hidden;
+}
+
+.Homepage-bar ul{
+    display: inline-flex;
+    color: white;
+    list-style: none;
+}
+
+.Homepage-bar ul li{
+    margin-left: 6vw;
+    margin-top: 2vh;
+    margin-bottom:2vh;
+    margin-right: 5.5vw;
+
+
+}
+
+
+.Homepage-bar ul li:last-child{
+    margin-right: 2vw;
+}
+
+
+.Homepage-bar ul li a{
+    text-decoration: none;
+    color:white;
+
+
+}
+
+.info{
+    display:none;
+}
+
+.Homepage-bar ul li:hover .info {
+    display:block;
+    background: cornflowerblue;
+    position: absolute;
+
+
+}
+.Homepage-bar ul li:hover .info ul{
+    display:block;
+
+
+}
+
+.Homepage-bar ul li:hover .info ul li a:hover{
+    color: black;
+
+}
+
+
+
+
+.quizzes{
+    display:none;
+
+}
+
+.Homepage-bar ul li:hover .quizzes {
+    display:block;
+    background: cornflowerblue;
+    position: absolute;
+
+
+}
+.Homepage-bar ul li:hover .quizzes ul{
+    display:block;
+    margin:3vh 0.5vw;
+
+}
+
+.Homepage-bar ul li:hover .quizzes ul li a:hover{
+    color: black;
+}
+
+
+.friends-bar{
+    width:25vw;
+    height:75vh;
+    background-color: cornflowerblue;
+    align-items: center;
+    margin-top: 6vh;
+    margin-left: 5vw;
+    border-radius: 20px;
+    overflow: scroll;
+    border: 5px solid dodgerblue;
+
+
+}
+
+
+.friends-bar ul{
+    display: inline-block;
+    color: black;
+    list-style: none;
+
+}
+
+.friends-bar ul li{
+
+    width:20vw;
+    padding:10%;
+    border-bottom: 1px dotted white;
+    background: transparent;
+
+}
+
+.friends-bar ul li:last-child{
+
+    border-bottom: none;
+
+}
+
+.friends-bar ul li button{
+
+    float:right;
+    border-radius: 8px;
+    width:5vw;
+    color:midnightblue;
+    font-family: Arial;
+    background: darkorange;
+}
+
+
+.friends-bar ul li a{
+    text-decoration: none;
+    color:white;
+}
+
+.friends-bar ul li a:hover{
+    color:black;
+}
+
+.Search{
+    width:25vw;
+    height: 4.5vh;
+    display: inline-flex;
+    margin-left:5vw;
+    background: cornflowerblue;
+    border-radius: 5px;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+}
+.Search input{
+    margin-left:3vh;
+    width:16vw;
+
+    margin-top: 1.5vh;
+    margin-bottom: 1vh;
+    border-radius: 4px;
+}
+
+.Search button{
+    width:5vw;
+    color:black;
+    background: grey;
+
+
+}
