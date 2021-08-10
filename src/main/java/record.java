@@ -15,7 +15,7 @@ public class record {
     public void setStartTime(Timestamp startTime){this.startTime=startTime;}
     public void setEndTime(Timestamp endTime){this.endTime=endTime;}
 
-
+    public int getQuizID(){return quizID;}
     public int getUserID(){return userID;}
     public int getScore(){return score;}
     public int getMaxScore(){return maxScore;}
