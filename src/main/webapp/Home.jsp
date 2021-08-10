@@ -19,7 +19,7 @@
                     </ul>
                 </div>
             </li>
-            <li><a href="#"> Chat</a></li>
+            <li><a href="Chat.jsp"> Chat</a></li>
             <li><a href="#">Quizzes</a>
                 <div class="quizzes">
                     <ul>

@@ -1,13 +1,13 @@
-<%@ page import="user.User" %>
 <%@ page import="java.util.List" %>
+<%@ page import="user.User" %>
 <%@ page import="user.UserRelationManager" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <html>
 <head>
-    <title>Friends</title>
-    <link rel="stylesheet" href="Friends.css" >
+    <title>Chat</title>
+    <link rel="stylesheet" href="Chatstyle.css" >
 </head>
 <body>
 
@@ -39,38 +39,30 @@
 <div class="friends-bar">
     <ul>
 
-        <%
-
-            User tmp= (User) request.getSession().getAttribute(User.ATTRIBUTE_NAME);
+        <%User tmp= (User) request.getSession().getAttribute(User.ATTRIBUTE_NAME);
 
             List<String> friends = null;
             try {
                 friends = UserRelationManager.getFriendList(tmp.getUserName());
             } catch (SQLException throwables) {
-                request.getRequestDispatcher("Error.jsp?id=Friends.jsp");
+                request.getRequestDispatcher("Error.jsp?id=Chat.jsp");
             }
             if(friends!=null) {
-                if(friends.size()!=0) {
+                if(friends.size()>0) {
                     for (String curr : friends) {
-                        out.println("<li><a href=\"FriendsProfile.jsp?id=" + curr + "\">" + curr + "</a><button type=\"submit\" id=" + curr + "\">Remove</button></li>");
+                        out.println("<li><a href=\"Messages.jsp?friend=" + curr + "&user=" + tmp.getUserName() + "\">" + curr + "</a></li>");
                     }
                 }else{
-                    out.println("<li>"+"No friends"+"</li>");
+                    out.println("<li>"+"No Friends"+"</li>");
                 }
+
             }
         %>
+
     </ul>
 
 </div>
 
-<div class="search">
-    <form >
-        <input type="text" placeholder="Search Friend"/>
-        <button type="submit"  >Search</button>
-
-    </form>
-
-</div>
 
 </body>
 </html>

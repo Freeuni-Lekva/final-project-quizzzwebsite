@@ -22,7 +22,7 @@
                 </ul>
             </div>
         </li>
-        <li><a href="#"> Chat</a></li>
+        <li><a href="Chat.jsp"> Chat</a></li>
         <li><a href="#">Quizzes</a>
             <div class="quizzes">
                 <ul>
@@ -46,7 +46,7 @@
             try {
                 friends = UserRelationManager.getFriendList(tmp.getUserName());
             } catch (SQLException throwables) {
-                request.getRequestDispatcher("Error.jsp?id=\"Friends.jsp\"");
+                request.getRequestDispatcher("Error.jsp?id=Friends.jsp");
             }
             if(friends!=null) {
                 if(friends.size()!=0) {
