@@ -1,0 +1,22 @@
+*{
+    background-color: black;
+}
+
+.container1{
+    width: 80%;
+    height:40%;
+    position: absolute;
+    top: 30%;
+    left: 11%;
+    background-color: dodgerblue;
+    color: red;
+    border-radius:8px;
+}
+
+.back{
+    position: absolute;
+    top: 95%;
+    left: 3%;
+    background-color: yellow;
+    border-radius:3px;
+}
