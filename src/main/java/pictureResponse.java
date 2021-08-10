@@ -12,7 +12,8 @@ public class pictureResponse implements question{
     }
     @Override
     public String getHtmlTag(){
-        String name="3"+"-"+questionID+"-"+"0";
+      String zeroIndex="0";
+        String name=StaticVariables.PICTURE_RESPONSE_NUM+StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME+questionID+StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME+zeroIndex;
         String defaultText="photo question";
         String head="<h2>"+questionID+ ". "+defaultText+"</h2><br>";
         String imgSet="<img src=\""+imigeAddress+"\"><br>";
