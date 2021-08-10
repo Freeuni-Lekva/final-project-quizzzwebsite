@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.StringTokenizer;
-
+import DBConnect.DB;
 
 public class quizDao {
 
