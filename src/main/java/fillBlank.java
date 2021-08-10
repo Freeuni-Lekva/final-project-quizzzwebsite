@@ -12,9 +12,9 @@ public class fillBlank implements question{
     }
     @Override
     public String getHtmlTag() {
-        String textFields="";
+        String textFields=StaticVariables.EMPTY_STRING;
         for(int i=0; i<correctAnswers.size();i++){
-            String tmName="1"+"-"+questionID+"-";
+            String tmName=StaticVariables.FILL_BLANK_NUM+StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME+questionID+StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME;
             tmName+=i;
             textFields+="<h3>input answer:<input type=\"text\" name=\""+tmName+"\"/></h3><br>";
         }
