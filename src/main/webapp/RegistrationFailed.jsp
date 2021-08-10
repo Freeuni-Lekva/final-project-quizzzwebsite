@@ -15,7 +15,7 @@
         <input type="password" id="password" name="password" placeholder="Enter Password">
         <button type="submit"  class="register">Register</button>
     </form>
-    <a href="../../../../OOPProject/src/main/webapp/Welcome.jsp" >Sign in</a>
+    <a href="Welcome.jsp" >Sign in</a>
 </div>
 <a href="index.jsp">login</a>
 </body>

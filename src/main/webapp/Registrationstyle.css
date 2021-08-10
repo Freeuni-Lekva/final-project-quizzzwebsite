@@ -14,7 +14,7 @@ body{
     width: 25vw;
     height: 45vh;
     background-color: azure;
-    overflow: scroll;
+    overflow: hidden;
     border-radius: 10%;
     position: relative;
     margin : 15vh 10vw 40vh 65vw;
