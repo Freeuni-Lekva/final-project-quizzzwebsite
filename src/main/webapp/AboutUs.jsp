@@ -21,7 +21,7 @@
         <li><a href="#">Quizzes</a>
             <div class="quizzes">
                 <ul>
-                    <li><a href="#"> Create Quiz</a></li>
+                    <li><a href="QuizCreationPage.jsp"> Create Quiz</a></li>
                     <li><a href="#">Write a Quiz</a></li>
                 </ul>
             </div>

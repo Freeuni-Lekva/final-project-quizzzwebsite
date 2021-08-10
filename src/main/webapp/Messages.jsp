@@ -3,6 +3,8 @@
 <%@ page import="user.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="user.UserRelationManager" %>
+<%@ page import="user.Message" %>
+<%@ page import="user.ChatManager" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <html>
@@ -94,9 +96,9 @@
                      chat = ChatManager.getChat(user,friend);
                      if(chat.size()>0) ChatManager.changeUnseen(friend,user);
                  } catch (SQLException throwables) {
-                     request.getRequestDispatcher("\"Error.jsp?id="+"Chat.jsp"+"\">").forward(request,response);
+                     request.getRequestDispatcher("Error.jsp?id=Chat.jsp>").forward(request,response);
                  } catch (ClassNotFoundException e) {
-                     request.getRequestDispatcher("\"Error.jsp?id="+"Chat.jsp"+"\">").forward(request,response);
+                     request.getRequestDispatcher("Error.jsp?id=Chat.jsp").forward(request,response);
                  }
 
                  if(chat!=null) {
