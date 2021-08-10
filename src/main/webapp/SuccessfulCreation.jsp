@@ -20,5 +20,5 @@
 
 </div>
 </body>
-<a class="back" href="index.jsp" >Back</a>
+<a class="back" href="QuizCreationPage.jsp" >Back</a>
 </html>
