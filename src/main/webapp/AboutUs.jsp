@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>Messages</title>
+    <title>About Us</title>
     <link rel="stylesheet" href="AboutUsStyle.css" >
 </head>
 <body>
@@ -12,8 +12,8 @@
         <li><a href="#">Personal Info</a>
             <div class="info">
                 <ul>
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">Friends</a></li>
+                    <li><a href="Profile.jsp">Profile</a></li>
+                    <li><a href="Friends.jsp">Friends</a></li>
                 </ul>
             </div>
         </li>
