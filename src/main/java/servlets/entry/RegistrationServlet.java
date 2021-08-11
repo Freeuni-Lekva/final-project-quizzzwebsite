@@ -32,7 +32,7 @@ public class RegistrationServlet extends HttpServlet {
         } else {
             req.getSession().setAttribute(User.ATTRIBUTE_NAME, user);
             if(user.isAdmin()) {
-                rd = req.getRequestDispatcher("adminHomePage.jsp");
+                rd = req.getRequestDispatcher("adminPage.jsp");
             } else {
                 rd = req.getRequestDispatcher("Home.jsp");
             }
