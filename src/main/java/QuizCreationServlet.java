@@ -29,8 +29,8 @@ public class QuizCreationServlet extends HttpServlet {
         String practice=request.getParameter("practice");
         String random=request.getParameter("random");
         String pages=request.getParameter("pages");
-         User creatorUser=(User)request.getSession().getAttribute(User.ATTRIBUTE_NAME);
-        int creatorID=creatorUser.getID(); 
+        User creatorUser=(User)request.getSession().getAttribute(User.ATTRIBUTE_NAME);
+        int creatorID= creatorUser.getId();
         boolean tr=false;
         Enumeration en=request.getParameterNames();
         if(name.equals("")) checkValidate=false;

@@ -1,0 +1,190 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+body{
+    background-image: url("project3.jpg");
+    background-position: center;
+    background-size: cover;
+    box-sizing: border-box;
+    font-family: fantasy;
+}
+
+.Homepage-bar{
+    background: cornflowerblue;
+    align-items: center;
+    overflow: hidden;
+}
+
+.Homepage-bar ul{
+    display: inline-flex;
+    color: white;
+    list-style: none;
+}
+
+.Homepage-bar ul li{
+    margin-left: 6vw;
+    margin-top: 2vh;
+    margin-bottom:2vh;
+    margin-right: 5.5vw;
+
+
+}
+
+
+.Homepage-bar ul li:last-child{
+    margin-right: 2vw;
+}
+
+
+.Homepage-bar ul li a{
+    text-decoration: none;
+    color:white;
+
+
+}
+
+.info{
+    display:none;
+}
+
+.Homepage-bar ul li:hover .info {
+    display:block;
+    background: cornflowerblue;
+    position: absolute;
+
+
+}
+.Homepage-bar ul li:hover .info ul{
+    display:block;
+
+
+}
+
+.Homepage-bar ul li:hover .info ul li a:hover{
+    color: black;
+
+}
+
+
+
+
+.quizzes{
+    display:none;
+
+}
+
+.Homepage-bar ul li:hover .quizzes {
+    display:block;
+    background: cornflowerblue;
+    position: absolute;
+
+
+}
+.Homepage-bar ul li:hover .quizzes ul{
+    display:block;
+    margin:3vh 0.5vw;
+
+}
+
+.Homepage-bar ul li:hover .quizzes ul li a:hover{
+    color: black;
+}
+
+.boxes{
+    display: inline-flex;
+}
+
+.leaderboard{
+    width:20vw;
+    height: 60vh;
+    margin-top: 8vh;
+    margin-left:5vw;
+    background: wheat;
+    border-radius: 10px;
+
+}
+
+.title1{
+
+    width:20vw;
+    text-align: center;
+    background: darkorange;
+    color:white;
+
+
+}
+.leaderboard ul{
+    display: inline-block;
+    color: black;
+    list-style: none;
+    height: 55vh;
+    overflow: scroll;
+}
+
+.leaderboard ul li{
+
+    width:18vw;
+    padding:1vw;
+    border-bottom: 1px dotted white;
+    background: transparent;
+    display: inline-flex;
+
+}
+
+.leaderboard ul li p{
+
+   margin-left:6vw;
+
+}
+
+.leaderboard ul li:last-child{
+
+    border-bottom: none;
+
+}
+
+
+
+.Announcements{
+    width:38vw;
+    height: 80vh;
+    margin-top: 6vh;
+    margin-left:30vw;
+    background: wheat;
+
+
+}
+
+.title2{
+    text-align: center;
+    background: darkorange;
+    color:white;
+    width: 38vw;
+
+}
+
+.Announcements ul{
+    display: inline-block;
+    color: black;
+    list-style: none;
+    height: 75vh;
+    overflow: scroll;
+}
+
+.Announcements ul li{
+
+
+    width:34vw;
+    padding:2vw;
+    border-bottom: 1px dotted white;
+    background: transparent;
+
+}
+
+.Announcements ul li:last-child{
+
+    border-bottom: none;
+
+}

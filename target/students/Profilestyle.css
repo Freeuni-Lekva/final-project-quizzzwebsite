@@ -1,0 +1,120 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+body{
+    background-image: url("project3.jpg");
+    background-position: center;
+    background-size: cover;
+    box-sizing: border-box;
+    font-family: fantasy;
+}
+
+.Homepage-bar{
+    background: cornflowerblue;
+    align-items: center;
+    overflow: hidden;
+}
+
+.Homepage-bar ul{
+    display: inline-flex;
+    color: white;
+    list-style: none;
+}
+
+.Homepage-bar ul li{
+    margin-left: 6vw;
+    margin-top: 2vh;
+    margin-bottom:2vh;
+    margin-right: 5.5vw;
+
+
+}
+
+
+.Homepage-bar ul li:last-child{
+    margin-right: 2vw;
+}
+
+
+.Homepage-bar ul li a{
+    text-decoration: none;
+    color:white;
+
+
+}
+
+.info{
+    display:none;
+}
+
+.Homepage-bar ul li:hover .info {
+    display:block;
+    background: cornflowerblue;
+    position: absolute;
+
+
+}
+.Homepage-bar ul li:hover .info ul{
+    display:block;
+
+
+}
+
+.Homepage-bar ul li:hover .info ul li a:hover{
+    color: black;
+
+}
+
+
+
+
+.quizzes{
+    display:none;
+
+}
+
+.Homepage-bar ul li:hover .quizzes {
+    display:block;
+    background: cornflowerblue;
+    position: absolute;
+
+
+}
+.Homepage-bar ul li:hover .quizzes ul{
+    display:block;
+    margin:3vh 0.5vw;
+
+}
+
+.Homepage-bar ul li:hover .quizzes ul li a:hover{
+    color: black;
+}
+
+.profile{
+    width:60vw;
+    height:70vh;
+    margin-top:8vh;
+    margin-left:20vw;
+    background: wheat;
+    color:black;
+    font-family: fantasy;
+    border-radius: 10px;
+    display: block;
+    overflow: scroll;
+}
+
+.profile h1{
+    text-align: center;
+    text-decoration-style: solid;
+    text-decoration-line: underline blink;
+    color:cornflowerblue;
+  }
+
+.profile label{
+
+   margin-left:8vh;
+    margin-top:5vh;
+    margin-bottom: 8vh;
+}
