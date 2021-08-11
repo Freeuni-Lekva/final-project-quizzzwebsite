@@ -1,3 +1,7 @@
+package quiz;
+
+import quiz.questions.question;
+
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -24,9 +28,9 @@ public class getQuiz implements quiz{
         this.correct=correct;
         this.practice=practice;
         this.random=random;
-        questionList=quizDao.getQuestionList(getID());
+        questionList= quizDao.getQuestionList(getID());
         if(random==true){
-           questionList=quizDao.getRandomisedQuestionsList(questionList);
+           questionList= quizDao.getRandomisedQuestionsList(questionList);
         }
     }
 

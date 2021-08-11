@@ -15,7 +15,7 @@ public class DataSrc {
 
     public static Connection getConnection() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quiz", "root", "ტრანგალეტკა6");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quiz.quiz", "root", "ტრანგალეტკა6");
         } catch (Exception e) {
             e.printStackTrace();
         }

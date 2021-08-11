@@ -65,10 +65,12 @@
 
             <div class="questionCreation">
                 <br><h2 style="text-align:center;">Create Questions</h2><br/>
-                <button type="button"  onclick="addFillInQuestion()">add fill in question</button>
-                <button type="button"   onclick="addMultipleChoiceQuestion()">add multiple choice question</button>
-                <button type="button"   onclick="addPictureResponseQuestion()">add picture response question</button>
-                <button type="button"  onclick="addResponseQuestion()">add response question</button>
+                <button type="button"  onclick="addFillInQuestion()">add fill in quiz.questions.question</button>
+                <button type="button"   onclick="addMultipleChoiceQuestion()">add multiple choice
+                    quiz.questions.question</button>
+                <button type="button"   onclick="addPictureResponseQuestion()">add picture response
+                    quiz.questions.question</button>
+                <button type="button"  onclick="addResponseQuestion()">add response quiz.questions.question</button>
 
                 <script>
                     var countBox =1;
@@ -76,13 +78,13 @@
                     function addFillInQuestion()
                     {
                         var boxName="textBox"+countBox;
-                        document.getElementById('response').innerHTML+='<h4>Fill In Questions</h4>'+'<br/>Input question text and make  gap with "~"  symbol <input type="text" name="'+boxName+"11"+'"/><br>Input correct answers delimited with "~" symbol <input type="text" name="'+boxName+"21"+'"/><br/>';
+                        document.getElementById('response').innerHTML+='<h4>Fill In Questions</h4>'+'<br/>Input quiz.questions.question text and make  gap with "~"  symbol <input type="text" name="'+boxName+"11"+'"/><br>Input correct answers delimited with "~" symbol <input type="text" name="'+boxName+"21"+'"/><br/>';
                         countBox += 1;
                     }
                     function addMultipleChoiceQuestion()
                     {
                         var boxName="textBox"+countBox;
-                        document.getElementById('response').innerHTML+='<h4>Multiple Choice Questions</h4>'+'<br/>Input question text  <input type="text" name="'+boxName+"12"+'"/><br>Input correct answers delimited with "~" symbol <input type="text" name="'+boxName+"22"+'"/><br>Input probable answers delimited with "~" symbol <input type="text" name="'+boxName+"32"+'"/><br/>';
+                        document.getElementById('response').innerHTML+='<h4>Multiple Choice Questions</h4>'+'<br/>Input quiz.questions.question text  <input type="text" name="'+boxName+"12"+'"/><br>Input correct answers delimited with "~" symbol <input type="text" name="'+boxName+"22"+'"/><br>Input probable answers delimited with "~" symbol <input type="text" name="'+boxName+"32"+'"/><br/>';
                         countBox += 1;
                     }
                     function addPictureResponseQuestion()
@@ -94,7 +96,7 @@
                     function addResponseQuestion()
                     {
                         var boxName="textBox"+countBox;
-                        document.getElementById('response').innerHTML+='<h4>Response Question</h4>'+'<br/>Input question text <input type="text" name="'+boxName+"14"+'"/><br>Input correct answer <input type="text" name="'+boxName+"24"+'"/><br>Input probable answers delimited with "~" symbol <input type="text" name="'+boxName+"34"+'"/><br/>';
+                        document.getElementById('response').innerHTML+='<h4>Response Question</h4>'+'<br/>Input quiz.questions.question text <input type="text" name="'+boxName+"14"+'"/><br>Input correct answer <input type="text" name="'+boxName+"24"+'"/><br>Input probable answers delimited with "~" symbol <input type="text" name="'+boxName+"34"+'"/><br/>';
                         countBox += 1;
                     }
                 </script>

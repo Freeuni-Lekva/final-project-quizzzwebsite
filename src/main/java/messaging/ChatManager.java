@@ -1,4 +1,4 @@
-package user;
+package messaging;
 
 import DBConnect.DataSrc;
 
@@ -22,7 +22,7 @@ public class ChatManager {
 
 
 
-    private static void fillList(List<Message> l,ResultSet res) throws SQLException {
+    private static void fillList(List<Message> l, ResultSet res) throws SQLException {
         while(res.next()){
             l.add(new Message(res.getString("sender"),res.getString("receiver"),res.getString(
                     "message"),res.getString("time"),res.getBoolean("unseen")));

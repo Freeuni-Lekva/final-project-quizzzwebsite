@@ -1,6 +1,12 @@
+package quiz.questions;
+
+import quiz.questions.question;
+import quiz.quiz;
+import quiz.StaticVariables;
+
 import java.util.List;
 
-public class questionResponse implements  question{
+public class questionResponse implements question {
 
     private String questionText;
     private List<String> probableAnswers;
@@ -18,10 +24,10 @@ public class questionResponse implements  question{
     }
     @Override
     public String getHtmlTag(){
-       String radioButtons=StaticVariables.EMPTY_STRING;
+       String radioButtons= StaticVariables.EMPTY_STRING;
         for(int i=0; i<probableAnswers.size(); i++){
             String tmAnswer=probableAnswers.get(i);
-            String tmName=StaticVariables.QUESTION_RESPONSE_NUM+StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME+getQuestionID();
+            String tmName= StaticVariables.QUESTION_RESPONSE_NUM+ StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME+getQuestionID();
             radioButtons+="<input type=\"radio\" name=\""+tmName+"\" value=\""+probableAnswers.get(i)+"\"><label for=\""+tmName+"\">" +" "+probableAnswers.get(i)+"</label><br>";
         }
         String result="<div class=\"container\">"+"<h2>"+questionID+". "+"\" \""+questionText+"</h2><br>"+radioButtons+"</div><br>";

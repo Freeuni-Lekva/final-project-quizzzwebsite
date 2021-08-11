@@ -1,7 +1,7 @@
 
 import org.junit.Test;
-import user.ChatManager;
-import user.Message;
+import messaging.ChatManager;
+import messaging.Message;
 
 import java.sql.SQLException;
 import java.util.List;

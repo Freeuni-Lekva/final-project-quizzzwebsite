@@ -1,3 +1,5 @@
+package quiz;
+
 import java.sql.Timestamp;
 
 public class addQuiz implements quiz{

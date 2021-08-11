@@ -1,6 +1,11 @@
+package quiz.questions;
+
+import quiz.quiz;
+import quiz.StaticVariables;
+
 import java.util.List;
 
-public class multipleChoice implements question{
+public class multipleChoice implements question {
     private String questionText;
     private List<String> probableAnswers;
     private List<String> correctAnswers;
@@ -18,10 +23,10 @@ public class multipleChoice implements question{
     }
     @Override
     public String getHtmlTag(){
-         String checkBoxes=StaticVariables.EMPTY_STRING;
+         String checkBoxes= StaticVariables.EMPTY_STRING;
         for(int i=0; i<probableAnswers.size(); i++){
             String tmAnswer=probableAnswers.get(i);
-            String tmName=StaticVariables.MULTIPLE_CHOICE_NUM+StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME+questionID+StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME;
+            String tmName= StaticVariables.MULTIPLE_CHOICE_NUM+ StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME+questionID+ StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME;
             tmName+=i;
             checkBoxes+="<input type=\"checkbox\" name=\""+tmName+"\" value=\""+probableAnswers.get(i)+"\"><label for=\""+tmName+"\">" +" "+probableAnswers.get(i)+"</label><br>";
         }

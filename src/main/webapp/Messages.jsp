@@ -3,8 +3,8 @@
 <%@ page import="user.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="user.UserRelationManager" %>
-<%@ page import="user.Message" %>
-<%@ page import="user.ChatManager" %>
+<%@ page import="messaging.Message" %>
+<%@ page import="messaging.ChatManager" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <html>

@@ -2,8 +2,8 @@ use testDataBase;
 
 
 
-DROP TABLE IF EXISTS quiz;
-DROP TABLE IF EXISTS question;
+DROP TABLE IF EXISTS quiz.quiz;
+DROP TABLE IF EXISTS quiz.questions.question;
 DROP TABLE IF EXISTS historyTable;
 
 CREATE TABLE quiz(
