@@ -10,7 +10,7 @@ import quiz.quiz;
 
 public class quizDao {
 
-    private static final String DATABASE_NAME="testDataBase";
+    private static final String DATABASE_NAME="quiz";
     private static final String QUIZ_TABLE_NAME="quiz";
     private static final String QUESTION_TABLE_NAME="question";
     private static final String HISTORY_TABLE_NAME="historyTable";
@@ -76,7 +76,7 @@ public class quizDao {
             ID = rs.getInt(1);
        }
 
-        for(int i=1; i<=lst.size(); i++){
+        for(int i=0; i<lst.size(); i++){
             addQuestion(lst.get(i),ID,i);
         }
         return ID;

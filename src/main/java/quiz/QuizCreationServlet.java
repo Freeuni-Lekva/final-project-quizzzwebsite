@@ -76,7 +76,10 @@ public class QuizCreationServlet extends HttpServlet {
                 quizDao.addQUIZ(addableQuiz,lst);
                 reqDisp=request.getRequestDispatcher("SuccessfulCreation.jsp");
                 reqDisp.forward(request, response);
-            } catch (SQLException | ClassNotFoundException throwables) {
+            } catch (SQLException e){
+                System.out.println("somenew");
+            } catch(ClassNotFoundException throwables){
+                System.out.println("something");
                 response.sendRedirect("Error.jsp?id=quiz.QuizCreationServlet");
                 return;
             }
