@@ -10,7 +10,7 @@ public class DB {
     private static String host="localhost";
     private static String DBName="testDataBase";
     private static String userName= "sammy";
-    private static String password= "password";
+    private static String password= "datodvali28";
 
 
     private static Connection con;;
