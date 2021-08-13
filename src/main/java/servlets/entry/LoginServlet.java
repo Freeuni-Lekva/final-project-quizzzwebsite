@@ -24,6 +24,7 @@ public class LoginServlet extends HttpServlet {
             user = UserManager.getUser(email, passWord);
         } catch (Exception e) {
             resp.sendRedirect("Error.jsp?id=Welcome.jsp");
+            return;
         }
         RequestDispatcher rd;
         if(user == null) {

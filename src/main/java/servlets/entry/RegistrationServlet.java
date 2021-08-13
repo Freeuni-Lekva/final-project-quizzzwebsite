@@ -25,6 +25,7 @@ public class RegistrationServlet extends HttpServlet {
             user = UserManager.registerUser(userName, email, passWord);
         } catch(Exception e) {
             resp.sendRedirect("Error.jsp?id=Registration.jsp");
+            return;
         }
 
         if(user == null) {
