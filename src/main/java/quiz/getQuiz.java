@@ -1,7 +1,14 @@
+package quiz;
+
+import quiz.quiz;
+
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
-public class addQuiz implements quiz{
-
+public class getQuiz implements quiz {
+    private int ID;
     private String name;
     private String description;
     private int creatorID;
@@ -9,8 +16,10 @@ public class addQuiz implements quiz{
     private boolean practice;
     private boolean correct;
     private boolean pages;
+    private List<question> questionList=new ArrayList<question>();
     private boolean random;
-    public addQuiz(String name,  int creatorID, Timestamp created, String description, boolean pages, boolean practice, boolean correct, boolean random){
+    public getQuiz(int ID,String name,  int creatorID, Timestamp created, String description, boolean pages, boolean practice, boolean correct, boolean random) throws SQLException, ClassNotFoundException{
+        this.ID=ID;
         this.name=name;
         this.description=description;
         this.creatorID=creatorID;
@@ -19,6 +28,14 @@ public class addQuiz implements quiz{
         this.correct=correct;
         this.practice=practice;
         this.random=random;
+        questionList= quizDao.getQuestionList(getID());
+        if(random==true){
+           questionList= quizDao.getRandomisedQuestionsList(questionList);
+        }
+    }
+
+    public int getID(){
+        return ID;
     }
 
     public String getName(){
@@ -47,8 +64,12 @@ public class addQuiz implements quiz{
     public boolean isPages() {
         return pages;
     }
+    public List<question> getQuestions(){
+        return questionList;
+    }
 
-    public boolean isRandom(){
+    @Override
+    public boolean isRandom() {
         return random;
     }
 }

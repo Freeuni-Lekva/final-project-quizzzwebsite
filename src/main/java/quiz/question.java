@@ -1,3 +1,5 @@
+package quiz;
+
 import java.util.List;
 
 public interface question {

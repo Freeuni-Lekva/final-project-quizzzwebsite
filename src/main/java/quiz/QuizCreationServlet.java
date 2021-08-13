@@ -1,7 +1,8 @@
+package quiz;
+
 import  javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import javax.swing.text.AbstractDocument;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -9,9 +10,11 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
+import quiz.quiz;
 import user.User;
 
-@WebServlet(name = "QuizCreationServlet", value = "/Quiz-CreationServlet")
+@WebServlet(name = "quiz.QuizCreationServlet", value = "/quiz.QuizCreationServlet")
 public class QuizCreationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -74,7 +77,7 @@ public class QuizCreationServlet extends HttpServlet {
                 reqDisp=request.getRequestDispatcher("SuccessfulCreation.jsp");
                 reqDisp.forward(request, response);
             } catch (SQLException | ClassNotFoundException throwables) {
-                response.sendRedirect("Error.jsp?id=QuizCreationServlet");
+                response.sendRedirect("Error.jsp?id=quiz.QuizCreationServlet");
                 return;
             }
 

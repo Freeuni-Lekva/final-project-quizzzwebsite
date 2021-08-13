@@ -1,9 +1,12 @@
+package quiz;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.StringTokenizer;
 import DBConnect.DB;
+import quiz.quiz;
 
 public class quizDao {
 
@@ -79,7 +82,7 @@ public class quizDao {
         return ID;
      }
 
-    private static void addQuestion(questionParam questionParam,int ID,int questionID) throws SQLException, ClassNotFoundException {
+    private static void addQuestion(questionParam questionParam, int ID, int questionID) throws SQLException, ClassNotFoundException {
 
         DB db=new DB();
         Connection con=db.getConnection();
@@ -163,7 +166,7 @@ public class quizDao {
         preparedStatement.executeUpdate();
     }
 
-    // removes all records about particular quiz
+    // removes all records about particular quiz.quiz
     public static void removeRecordsByQuizID(int quizID) throws SQLException, ClassNotFoundException{
         DB db=new DB();
         Connection con=db.getConnection();

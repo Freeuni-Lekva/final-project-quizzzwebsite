@@ -1,8 +1,9 @@
+package quiz;
+
 import junit.framework.TestCase;
 import org.junit.Test;
-import org.junit.runner.notification.RunListener;
+import quiz.quiz;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.*;
@@ -41,7 +42,7 @@ public class testQuizDao extends TestCase {
         if(qP2.checkValidate())lst.add(qP2);
         timeStmp=Timestamp.from(Instant.now());
         quiz aQ=new addQuiz(  QUIZ_NAME,  CREATOR_ID, timeStmp, QUIZ_DESCRIPTION , false, false, false, true);
-         quizID=quizDao.addQUIZ(aQ,lst);
+         quizID= quizDao.addQUIZ(aQ,lst);
 
         List<questionParam> lst2=new ArrayList<questionParam>();
         questionParam qP3=new questionParam(1,"","a","bas~");
@@ -52,9 +53,9 @@ public class testQuizDao extends TestCase {
         if(qP5.checkValidate())lst2.add(qP5);
 
         quiz aQ2=new addQuiz(  QUIZ_NAME+"1",  CREATOR_ID, Timestamp.from(Instant.now()), QUIZ_DESCRIPTION+"aaaaaaaaaaa" , false, false, false, false);
-        quizID2=quizDao.addQUIZ(aQ2,lst2);
+        quizID2= quizDao.addQUIZ(aQ2,lst2);
 
-        retQuiz2=(getQuiz)quizDao.getQUIZ(quizID2);
+        retQuiz2=(getQuiz) quizDao.getQUIZ(quizID2);
 
         returnedQuiz=(getQuiz) quizDao.getQUIZ(quizID);
         questionLst=returnedQuiz.getQuestions();
@@ -73,14 +74,14 @@ public class testQuizDao extends TestCase {
         rec.setEndTime(recordEnd);
 
         quizDao.insertRecord(rec);
-        returnedRecordsByUserID=quizDao.getRecordsByUserID(USER_ID);
-        returnedRecordsByQuizID=quizDao.getRecordsByQuizID(quizID);
+        returnedRecordsByUserID= quizDao.getRecordsByUserID(USER_ID);
+        returnedRecordsByQuizID= quizDao.getRecordsByQuizID(quizID);
 
         quizDao.removeRecordsByUserID(USER_ID);
         quizDao.removeRecordsByQuizID(quizID);
 
-        returnedEmptyRecordsByQuizID=quizDao.getRecordsByQuizID(quizID);
-        returnedEmptyRecordsByUserID=quizDao.getRecordsByUserID(USER_ID);
+        returnedEmptyRecordsByQuizID= quizDao.getRecordsByQuizID(quizID);
+        returnedEmptyRecordsByUserID= quizDao.getRecordsByUserID(USER_ID);
 
 
 

@@ -1,3 +1,5 @@
+package quiz;
+
 public class StaticVariables {
     public static final int FILL_BLANK_NUM=1;
     public static final int MULTIPLE_CHOICE_NUM=2;

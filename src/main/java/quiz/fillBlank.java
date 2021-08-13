@@ -1,6 +1,11 @@
+package quiz;
+
+import quiz.StaticVariables;
+import quiz.question;
+
 import java.util.List;
 
-public class fillBlank implements question{
+public class fillBlank implements question {
     private String questionText;
     private List<String> correctAnswers;
     private int questionID;
@@ -12,7 +17,7 @@ public class fillBlank implements question{
     }
     @Override
     public String getHtmlTag() {
-        String textFields=StaticVariables.EMPTY_STRING;
+        String textFields= StaticVariables.EMPTY_STRING;
         for(int i=0; i<correctAnswers.size();i++){
             String tmName=StaticVariables.FILL_BLANK_NUM+StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME+questionID+StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME;
             tmName+=i;

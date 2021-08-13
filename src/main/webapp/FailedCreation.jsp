@@ -15,7 +15,7 @@
 
 <div class="container1">
 
-        <h1  align="center">Unfortunately quiz didn't registered. It was not valid</h1>
+        <h1  align="center">Unfortunately quiz.quiz didn't registered. It was not valid</h1>
         <h1 align="center">Try it again</h1>
 
 </div>
