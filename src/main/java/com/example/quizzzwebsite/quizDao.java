@@ -9,7 +9,10 @@ import DBConnect.DB;
 import DBConnect.DataSrc;
 
 public class quizDao {
-
+    private static int numQuizzes = 0;
+    private static boolean numQuizzesChanged = false;
+    private static int numAttempts = 0;
+    private static boolean numAttemptsChanged = false;
     private static final String DATABASE_NAME="quiz";
     private static final String QUIZ_TABLE_NAME="quiz";
     private static final String QUESTION_TABLE_NAME="question";
@@ -80,6 +83,8 @@ public class quizDao {
         for(int i=0; i<lst.size(); i++){
             addQuestion(lst.get(i),ID,i);
         }
+        numQuizzes++;
+        numQuizzesChanged = true;
         return ID;
      }
 
@@ -184,6 +189,8 @@ public class quizDao {
         PreparedStatement prepStat2=con.prepareStatement("DELETE FROM "+QUESTION_TABLE_NAME+" WHERE quizId=?;");
         prepStat2.setInt(1,ID);
         prepStat2.executeUpdate();
+        numQuizzes--;
+        numQuizzesChanged = true;
         removeRecordsByQuizID(ID);
 
     }
@@ -202,6 +209,8 @@ public class quizDao {
         preparedStatement.setInt(5,record.getScore());
         preparedStatement.setInt(6,record.getMaxScore());
         preparedStatement.executeUpdate();
+        numAttempts++;
+        numAttemptsChanged = true;
     }
 
     // removes all records about particular quiz
@@ -267,4 +276,38 @@ public class quizDao {
         }
         return result;
     }
+    public static int getNumQuizzes() throws SQLException {
+        if(numQuizzesChanged){
+            Connection con = DataSrc.getConnection();
+            PreparedStatement statement = con.prepareStatement("select * from quiz;");
+            ResultSet rs = statement.executeQuery();
+            if(rs == null){
+                return numQuizzes;
+            }
+            numQuizzes = 0;
+            while(rs.next()){
+                numQuizzes++;
+            }
+            numQuizzesChanged = false;
+        }
+        return numQuizzes;
+    }
+
+    public static int getNumAttempts() throws SQLException {
+        if(numAttemptsChanged){
+            Connection con = DataSrc.getConnection();
+            PreparedStatement statement = con.prepareStatement("select * from quiz;");
+            ResultSet rs = statement.executeQuery();
+            if(rs == null){
+                return 0;
+            }
+            numAttempts= 0;
+            while(rs.next()){
+                numAttempts++;
+            }
+            numAttemptsChanged = false;
+        }
+        return numAttempts;
+    }
+
 }

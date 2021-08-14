@@ -15,6 +15,24 @@
 <body>
 <h1>Admin Page</h1>
 <br>
+<div id="siteStatistics">
+  <label> Site Statistics </label>
+  <br>
+  <br>
+  <table name="statistics">
+    <tr>
+      <th> Number of Users </th>
+      <th> Number of Quizzes </th>
+      <th> Number of Quiz attempts </th>
+    </tr>
+    <tr>
+      <th><%=UserManager.getNumUsers()%></th>
+      <th><%=quizDao.getNumQuizzes()%></th>
+      <th><%=quizDao.getNumAttempts()%> </th>
+    </tr>
+  </table>
+</div>
+<br>
 <div id="announcements">
   <h1>Create an Announcement</h1>
   <form>
@@ -43,24 +61,6 @@
   <form action="adminServlet" method="get">
     <button name = "quizManagementButton" type = "submit"> Manage quizzes </button>
   </form>
-</div>
-
-<div id="siteStatistics">
-  <label> Site Statistics </label>
-  <br>
-  <br>
-  <table name="statistics">
-    <tr>
-      <th> Number of Users </th>
-      <th> Number of Quizzes </th>
-      <th> Number of Quiz attempts </th>
-    </tr>
-    <%--<tr>
-      <th><%=UserManager.getNumUsers()%></th>
-      <th><%=quizDao.getNumQuizzes()%></th>
-      <th> </th>
-    </tr>--%>
-  </table>
 </div>
 </body>
 </html>
