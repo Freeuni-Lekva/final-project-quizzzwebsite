@@ -98,6 +98,22 @@ public class quizDao {
         prepStat.executeUpdate();
     }
 
+    public static List<getQuiz> getQuizByName(String quizName) throws SQLException, ClassNotFoundException {
+        List<getQuiz> list = new ArrayList<getQuiz>();
+        Connection con = DataSrc.getConnection();
+        con.createStatement().executeQuery(useQuery);
+        PreparedStatement statement = con.prepareStatement("select * from " + QUIZ_TABLE_NAME + " where name like ?;");
+        statement.setString(1,"%" + quizName + "%");
+        ResultSet rs = statement.executeQuery();
+        while(rs.next()){
+            list.add(new getQuiz(rs.getInt(1),rs.getString(2),rs.getInt(3),
+                    Timestamp.valueOf(rs.getString(4)),rs.getString(5),
+                    rs.getBoolean(6),rs.getBoolean(7),rs.getBoolean(8),
+                    rs.getBoolean(9)));
+        }
+        return list;
+    }
+
     public static quiz getQUIZ(int ID) throws SQLException, ClassNotFoundException {
         DB db=new DB();
         Connection con=db.getConnection();
