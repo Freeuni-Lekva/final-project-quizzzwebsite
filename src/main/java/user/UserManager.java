@@ -1,6 +1,7 @@
 package user;
 
 import DBConnect.DataSrc;
+import com.example.quizzzwebsite.quizDao;
 
 import java.security.MessageDigest;
 import java.sql.Connection;
@@ -67,6 +68,29 @@ public class UserManager {
         return users;
     }
 
+    public static List<User> getUserByName(String userName) throws SQLException{
+        List<User> users = new ArrayList<User>();
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        try {
+            con = DataSrc.getConnection();
+            statement = con.prepareStatement("select * from users where userName like ?");
+            statement.setString(1, "%" + userName + "%");
+            rs = statement.executeQuery();
+            while(rs.next()) {
+                users.add(new User(rs.getInt(1) ,
+                        rs.getString("userName"),
+                        rs.getString(2),
+                        rs.getBoolean(5)));
+            }
+        } finally {
+            try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
+        }
+        return users;
+    }
+
     public static User registerUser(String userName, String email, String password) throws SQLException{
         if(emailRegistered(email) || userNameUsed(userName) || password == null) {
             return null;
@@ -89,10 +113,68 @@ public class UserManager {
         return user;
     }
 
-    public static boolean deleteUser(long userId) {
+    public static boolean promoteUser(String userName) throws SQLException {
+        PreparedStatement statement1 = null;
+        PreparedStatement statement2 = null;
+        ResultSet rs = null;
+        try{
+            con = DataSrc.getConnection();
+            statement1 = con.prepareStatement("select * from users where userName = ?;");
+            statement1.setString(1,userName);
+            rs = statement1.executeQuery();
 
-        return false;
+            boolean flag = false;
+            while(rs.next()){
+                flag = true;
+                break;
+            }
+            if(!flag)return false;
+
+            statement2 = con.prepareStatement("update users set isAdmin = 1 where userName = ?;");
+            statement2.setString(1,userName);
+            statement2.executeUpdate();
+        }finally{
+            try { if (statement1 != null) statement1.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (statement2 != null) statement2.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
+        }
+        return true;
     }
+
+    public static boolean deleteUser(String userName) throws SQLException, ClassNotFoundException {
+        PreparedStatement statement1 = null;
+        PreparedStatement statement2 = null;
+        ResultSet rs = null;
+        try{
+            con = DataSrc.getConnection();
+            statement1 = con.prepareStatement("select * from users where userName = ? ;");
+            statement1.setString(1,userName);
+            rs = statement1.executeQuery();
+
+            int userId = 0;
+            boolean flag = false;
+            while(rs.next()){
+                userId = rs.getInt("userId");
+                flag = true;
+                break;
+            }
+            if(!flag){
+                return false;
+            }
+            quizDao.removeRecordsByUserID(userId);
+
+            statement2 = con.prepareStatement("delete from users where userName = ?;");
+            statement2.setString(1,userName);
+            statement2.execute();
+
+        }finally{
+            try { if (statement1 != null) statement1.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (statement2 != null) statement2.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
+        }
+        return true;
+    }
+
 
     public static List<User> searchUsers(String userName) throws SQLException {
         List<User> res = new ArrayList<>();

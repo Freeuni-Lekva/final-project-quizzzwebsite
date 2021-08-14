@@ -20,6 +20,38 @@
   <button type="submit" id="searchUsers"> Search </button>
 </form>
 <!-- <script type="text/javascript" src="searchUsers.js"></script> -->
+<script type="text/javascript">
+  function searchUser() {
+    console.log("it really logged something");
+    let table = document.getElementById("users");
+    let parent = table.parentElement;
+    parent.removeChild(table);
+    let req = null;
+    try {
+      req = new XMLHttpRequest();
+    } catch (e) {
+      req = new ActiveXObject();
+    }
+    if (req == null) {
+      alert("ajax not supported");
+    }
+    req.onreadystatechange = handler;
+    let url = "UserManagementServlet?userName=" + document.getElementById("userName").value;
+    req.open("get", url);
+    req.send(null);
+
+    function handler() {
+      if (req.readyState == 4) {
+        if (req.status == 200) {
+          //document.getElementById("usersTableContainer").insertAdjacentHTML("beforeend","<button> somebutton </button>");
+          document.getElementById("usersTableContainer").insertAdjacentHTML("beforeend", req.responseText);
+        } else {
+          alert("ajax erred my friend");
+        }
+      }
+    }
+  }
+</script>
 <div id="usersTableContainer">
   <table id="users">
     <tr>
