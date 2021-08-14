@@ -1,7 +1,8 @@
+package com.example.quizzzwebsite;
+
 import  javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import javax.swing.text.AbstractDocument;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -9,17 +10,13 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
 import user.User;
 
-@WebServlet(name = "QuizCreationServlet", value = "/Quiz-CreationServlet")
+@WebServlet(name = "com.example.quizzzwebsite.QuizCreationServlet", value = "/Quiz-CreationServlet")
 public class QuizCreationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean checkValidate=true;
         Timestamp tmst=Timestamp.from(Instant.now());
         List<questionParam> lst=new ArrayList<questionParam>();
@@ -29,7 +26,7 @@ public class QuizCreationServlet extends HttpServlet {
         String practice=request.getParameter("practice");
         String random=request.getParameter("random");
         String pages=request.getParameter("pages");
-         User creatorUser=(User)request.getSession().getAttribute(User.ATTRIBUTE_NAME);
+        User creatorUser=(User)request.getSession().getAttribute(User.ATTRIBUTE_NAME);
         int creatorID=creatorUser.getId();
         boolean tr=false;
         Enumeration en=request.getParameterNames();
@@ -69,18 +66,21 @@ public class QuizCreationServlet extends HttpServlet {
         }else {
             quiz addableQuiz =new addQuiz(name,1,tmst,description, pages.equals("yes"),  practice.equals("yes"),  correction.equals("yes"),  random.equals("yes"));
             try {
-              quizDao.removeRecordsByUserID(11);
+                //
+                // quizDao.removeRecordsByUserID(11);
                 quizDao.addQUIZ(addableQuiz,lst);
                 reqDisp=request.getRequestDispatcher("SuccessfulCreation.jsp");
                 reqDisp.forward(request, response);
-            } catch (SQLException | ClassNotFoundException throwables) {
-                response.sendRedirect("Error.jsp?id=QuizCreationServlet");
+            } catch (SQLException | ClassNotFoundException throwables){
+                System.out.println("cool");
+                response.sendRedirect("Error.jsp?id=QuizCreationPage.jsp");
                 return;
             }
-
         }
+    }
 
-
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 }

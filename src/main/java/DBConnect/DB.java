@@ -8,8 +8,8 @@ import java.sql.Statement;
 
 public class DB {
     private static String host="localhost";
-    private static String DBName="testDataBase";
-    private static String userName= "sammy";
+    private static String DBName="quiz";
+    private static String userName= "root";
     private static String password= "datodvali28";
 
 

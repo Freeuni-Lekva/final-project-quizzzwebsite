@@ -1,3 +1,5 @@
+package com.example.quizzzwebsite;
+
 import java.sql.Timestamp;
 
 public class record {
