@@ -23,7 +23,7 @@
     <button type="submit" id="searchQuizzes"> Search </button>
 </form>
 <script type="text/javascript" src="searchQuizzes.js"></script> -->
-<div id="someId">
+<div id="quizTableContainer">
     <table id="quizzes" >
         <tr>
             <th> Quiz Name </th>
@@ -37,7 +37,7 @@
                 list = quizDao.getAllQuizzes();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
-                return;
+                response.sendRedirect("Error.jsp?id=adminPage.jsp");
             }
             if(list != null) {
                 for (int i = 0; i < list.size(); i++) {
