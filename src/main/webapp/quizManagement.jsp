@@ -17,12 +17,11 @@
 <body>
 <h1> Manage Quizzes </h1>
 
-<!-- will be added later
 <form action="QuizManagementServlet" method="get" onsubmit="searchQuiz(); return false">
     <input id="quizName" name="quizName" type="text" placeholder="Enter Quiz name">
     <button type="submit" id="searchQuizzes"> Search </button>
 </form>
-<script type="text/javascript" src="searchQuizzes.js"></script> -->
+<script type="text/javascript" src="searchQuizzes.js"></script>
 <div id="quizTableContainer">
     <table id="quizzes" >
         <tr>
