@@ -1,3 +1,5 @@
+package com.example.quizzzwebsite;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +9,12 @@ import DBConnect.DB;
 
 public class quizDao {
 
-    private static final String DATABASE_NAME="testDataBase";
+    private static final String DATABASE_NAME="quiz";
     private static final String QUIZ_TABLE_NAME="quiz";
     private static final String QUESTION_TABLE_NAME="question";
     private static final String HISTORY_TABLE_NAME="historyTable";
     private static String useQuery="USE "+DATABASE_NAME+";";
-    private static String getQuery="SELECT * FROM "+QUESTION_TABLE_NAME+" WHERE quizID=? ORDER BY questionId ASC;";
+    private static String getQuery="SELECT * FROM "+QUESTION_TABLE_NAME+" WHERE quizId=? ORDER BY questionId ASC;";
 
     public static List<question> getQuestionList(int ID) throws SQLException, ClassNotFoundException{
         List<question> res=new ArrayList<question>();
@@ -67,19 +69,20 @@ public class quizDao {
         prepStat.setBoolean(7,addableQuiz.isCorrect());
         prepStat.setBoolean(8,addableQuiz.isRandom());
         prepStat.executeUpdate();
-        ResultSet rs=con.createStatement().executeQuery("SELECT * FROM "+QUIZ_TABLE_NAME+" WHERE created='"+str+"';");
+        ResultSet rs=con.createStatement().executeQuery("SELECT * FROM "+QUIZ_TABLE_NAME+" WHERE created = '"+str+"';");
+
         int ID=0;
        while(rs.next()) {
             ID = rs.getInt(1);
        }
 
-        for(int i=1; i<=lst.size(); i++){
+        for(int i=0; i<lst.size(); i++){
             addQuestion(lst.get(i),ID,i);
         }
         return ID;
      }
 
-    private static void addQuestion(questionParam questionParam,int ID,int questionID) throws SQLException, ClassNotFoundException {
+    private static void addQuestion(questionParam questionParam, int ID, int questionID) throws SQLException, ClassNotFoundException {
 
         DB db=new DB();
         Connection con=db.getConnection();
@@ -105,8 +108,10 @@ public class quizDao {
 
         if(!rs.first())return null;
 
-         quiz resultQuiz = new getQuiz(ID,rs.getString(2),rs.getInt(3), Timestamp.valueOf(rs.getString(4)),rs.getString(5),rs.getBoolean(6),rs.getBoolean(7),rs.getBoolean(8),rs.getBoolean(9));
-
+         quiz resultQuiz = new getQuiz(ID,rs.getString(2),rs.getInt(3),
+                 Timestamp.valueOf(rs.getString(4)),rs.getString(5),
+                 rs.getBoolean(6),rs.getBoolean(7),rs.getBoolean(8),
+                 rs.getBoolean(9));
         return resultQuiz;
     }
 
@@ -153,7 +158,7 @@ public class quizDao {
         con.createStatement().executeQuery(useQuery);
         String startTm=""+record.getStartTime();
         String endTm=""+record.getEndTime();
-        PreparedStatement preparedStatement=con.prepareStatement("INSERT INTO "+HISTORY_TABLE_NAME+" (quizID,userID,startTime,endTime,score,maxScore) VALUES(?,?,?,?,?,?);");
+        PreparedStatement preparedStatement=con.prepareStatement("INSERT INTO "+HISTORY_TABLE_NAME+" (quizId,userId,startTime,endTime,score,maxScore) VALUES(?,?,?,?,?,?);");
         preparedStatement.setInt(1,record.getQuizID());
         preparedStatement.setInt(2,record.getUserID());
         preparedStatement.setString(3,startTm);
@@ -168,7 +173,7 @@ public class quizDao {
         DB db=new DB();
         Connection con=db.getConnection();
         con.createStatement().executeQuery(useQuery);
-        PreparedStatement prepStat1=con.prepareStatement("DELETE FROM "+HISTORY_TABLE_NAME+" WHERE quizID=?;");
+        PreparedStatement prepStat1=con.prepareStatement("DELETE FROM "+HISTORY_TABLE_NAME+" WHERE quizId=?;");
         prepStat1.setInt(1,quizID);
         prepStat1.executeUpdate();
     }
@@ -178,7 +183,7 @@ public class quizDao {
         DB db=new DB();
         Connection con=db.getConnection();
         con.createStatement().executeQuery(useQuery);
-        PreparedStatement prepStat1=con.prepareStatement("DELETE FROM "+HISTORY_TABLE_NAME+" WHERE userID=?;");
+        PreparedStatement prepStat1=con.prepareStatement("DELETE FROM "+HISTORY_TABLE_NAME+" WHERE userId=?;");
         prepStat1.setInt(1,userID);
         prepStat1.executeUpdate();
     }

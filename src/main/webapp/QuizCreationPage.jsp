@@ -8,7 +8,7 @@
     String forAdmin="adminPage.jsp";
     String jspName="Home.jsp";
 
-     User usr=(User)application.getAttribute(User.ATTRIBUTE_NAME);
+     User usr=(User)request.getSession().getAttribute(User.ATTRIBUTE_NAME);
      if(usr.isAdmin()) jspName=forAdmin;
 
 
@@ -65,10 +65,10 @@
 
             <div class="questionCreation">
                 <br><h2 style="text-align:center;">Create Questions</h2><br/>
-                <button type="button"  onclick="addFillInQuestion()">add fill in question</button>
-                <button type="button"   onclick="addMultipleChoiceQuestion()">add multiple choice question</button>
-                <button type="button"   onclick="addPictureResponseQuestion()">add picture response question</button>
-                <button type="button"  onclick="addResponseQuestion()">add response question</button>
+                <button type="button"  onclick="addFillInQuestion()">Fill-In question</button>
+                <button type="button"   onclick="addMultipleChoiceQuestion()">Multiple-Choice question</button>
+                <button type="button"   onclick="addPictureResponseQuestion()">Picture-Response question</button>
+                <button type="button"  onclick="addResponseQuestion()">Response question</button>
 
                 <script>
                     var countBox =1;

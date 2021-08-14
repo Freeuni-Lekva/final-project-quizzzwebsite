@@ -1,6 +1,8 @@
+package com.example.quizzzwebsite;
+
 import java.sql.Timestamp;
 
-public class addQuiz implements quiz{
+public class addQuiz implements quiz {
 
     private String name;
     private String description;
