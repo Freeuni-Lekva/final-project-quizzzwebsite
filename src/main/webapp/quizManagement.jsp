@@ -37,6 +37,7 @@
                 list = quizDao.getAllQuizzes();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
+                response.sendRedirect("Error.jsp?id=adminPage.jsp");
                 return;
             }
             if(list != null) {
