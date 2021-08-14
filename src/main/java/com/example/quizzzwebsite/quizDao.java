@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.StringTokenizer;
 import DBConnect.DB;
+import DBConnect.DataSrc;
 
 public class quizDao {
 
@@ -113,6 +114,25 @@ public class quizDao {
                  rs.getBoolean(6),rs.getBoolean(7),rs.getBoolean(8),
                  rs.getBoolean(9));
         return resultQuiz;
+    }
+
+    public static List<getQuiz> getAllQuizzes() throws SQLException, ClassNotFoundException {
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        List<getQuiz> list = new ArrayList<getQuiz>();
+        Connection con = DataSrc.getConnection();
+        statement = con.prepareStatement("select * from " + QUIZ_TABLE_NAME + ";");
+        rs = statement.executeQuery();
+        while(rs.next()){
+            list.add(new getQuiz(rs.getInt("quizId"),rs.getString("name"),rs.getInt("creatorId"),
+                    rs.getTimestamp("created"),rs.getString("description"),
+                    rs.getBoolean("pages"),rs.getBoolean("practice"),
+                    rs.getBoolean("correct"),rs.getBoolean("random")));
+        }
+        if(statement != null)statement.close();
+        if(rs != null)rs.close();
+        if(con != null)con.close();
+        return list;
     }
 
     private static List<String> getList (String str) {

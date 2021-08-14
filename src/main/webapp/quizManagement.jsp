@@ -16,11 +16,13 @@
 </head>
 <body>
 <h1> Manage Quizzes </h1>
+
+<!-- will be added later
 <form action="QuizManagementServlet" method="get" onsubmit="searchQuiz(); return false">
     <input id="quizName" name="quizName" type="text" placeholder="Enter Quiz name">
     <button type="submit" id="searchQuizzes"> Search </button>
 </form>
-<script type="text/javascript" src="searchQuizzes.js"></script>
+<script type="text/javascript" src="searchQuizzes.js"></script> -->
 <div id="someId">
     <table id="quizzes" >
         <tr>
@@ -31,11 +33,12 @@
         </tr>
         <%
             List<getQuiz> list = null;
-           // try {
-                //list = quizDao.getAllQuizzes();
-            //} catch (SQLException throwables) {
-              //  throwables.printStackTrace();
-            //}
+            try {
+                list = quizDao.getAllQuizzes();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                return;
+            }
             if(list != null) {
                 for (int i = 0; i < list.size(); i++) {
                     getQuiz temp = list.get(i);
