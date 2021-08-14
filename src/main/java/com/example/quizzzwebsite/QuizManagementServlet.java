@@ -43,6 +43,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
             out.write(respText);
         }catch(SQLException | ClassNotFoundException throwables){
             throwables.printStackTrace();
+            response.sendRedirect("Error.jsp?id=quizManagement.jsp");
+            return;
         }
     } else {
         int quizId = Integer.parseInt(request.getParameter("quizId"));
@@ -52,6 +54,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
             } catch (SQLException | ClassNotFoundException throwables) {
                 throwables.printStackTrace();
                 response.sendRedirect("Error.jsp?id=quizManagement.jsp");
+                return;
             }
         } else if (buttonType.equals("clearButton")) {
             try {
@@ -59,6 +62,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
             } catch (SQLException | ClassNotFoundException throwables) {
                 throwables.printStackTrace();
                 response.sendRedirect("Error.jsp?id=quizManagement.jsp");
+                return;
             }
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("quizManagement.jsp");

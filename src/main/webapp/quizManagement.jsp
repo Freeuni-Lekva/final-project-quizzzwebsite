@@ -37,6 +37,7 @@
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
                 response.sendRedirect("Error.jsp?id=adminPage.jsp");
+                return;
             }
             if(list != null) {
                 for (int i = 0; i < list.size(); i++) {
