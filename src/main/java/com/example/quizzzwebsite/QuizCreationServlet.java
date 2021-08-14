@@ -17,6 +17,11 @@ import user.User;
 public class QuizCreationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean checkValidate=true;
         Timestamp tmst=Timestamp.from(Instant.now());
         List<questionParam> lst=new ArrayList<questionParam>();
@@ -62,25 +67,17 @@ public class QuizCreationServlet extends HttpServlet {
         if(!checkValidate || !tr) {
             reqDisp=request.getRequestDispatcher("FailedCreation.jsp");
             reqDisp.forward(request, response);
-
         }else {
-            quiz addableQuiz =new addQuiz(name,1,tmst,description, pages.equals("yes"),  practice.equals("yes"),  correction.equals("yes"),  random.equals("yes"));
+            User user = (User)request.getSession().getAttribute(User.ATTRIBUTE_NAME);
+            quiz addableQuiz =new addQuiz(name,user.getId(),tmst,description, pages.equals("yes"),  practice.equals("yes"),  correction.equals("yes"),  random.equals("yes"));
             try {
-                //
-                // quizDao.removeRecordsByUserID(11);
                 quizDao.addQUIZ(addableQuiz,lst);
                 reqDisp=request.getRequestDispatcher("SuccessfulCreation.jsp");
                 reqDisp.forward(request, response);
             } catch (SQLException | ClassNotFoundException throwables){
-                System.out.println("cool");
                 response.sendRedirect("Error.jsp?id=QuizCreationPage.jsp");
                 return;
             }
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

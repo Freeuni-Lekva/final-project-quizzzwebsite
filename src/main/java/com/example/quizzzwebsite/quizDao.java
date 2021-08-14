@@ -14,7 +14,7 @@ public class quizDao {
     private static final String QUESTION_TABLE_NAME="question";
     private static final String HISTORY_TABLE_NAME="historyTable";
     private static String useQuery="USE "+DATABASE_NAME+";";
-    private static String getQuery="SELECT * FROM "+QUESTION_TABLE_NAME+" WHERE quizID=? ORDER BY questionId ASC;";
+    private static String getQuery="SELECT * FROM "+QUESTION_TABLE_NAME+" WHERE quizId=? ORDER BY questionId ASC;";
 
     public static List<question> getQuestionList(int ID) throws SQLException, ClassNotFoundException{
         List<question> res=new ArrayList<question>();
@@ -108,8 +108,10 @@ public class quizDao {
 
         if(!rs.first())return null;
 
-         quiz resultQuiz = new getQuiz(ID,rs.getString(2),rs.getInt(3), Timestamp.valueOf(rs.getString(4)),rs.getString(5),rs.getBoolean(6),rs.getBoolean(7),rs.getBoolean(8),rs.getBoolean(9));
-
+         quiz resultQuiz = new getQuiz(ID,rs.getString(2),rs.getInt(3),
+                 Timestamp.valueOf(rs.getString(4)),rs.getString(5),
+                 rs.getBoolean(6),rs.getBoolean(7),rs.getBoolean(8),
+                 rs.getBoolean(9));
         return resultQuiz;
     }
 
@@ -156,7 +158,7 @@ public class quizDao {
         con.createStatement().executeQuery(useQuery);
         String startTm=""+record.getStartTime();
         String endTm=""+record.getEndTime();
-        PreparedStatement preparedStatement=con.prepareStatement("INSERT INTO "+HISTORY_TABLE_NAME+" (quizID,userID,startTime,endTime,score,maxScore) VALUES(?,?,?,?,?,?);");
+        PreparedStatement preparedStatement=con.prepareStatement("INSERT INTO "+HISTORY_TABLE_NAME+" (quizId,userId,startTime,endTime,score,maxScore) VALUES(?,?,?,?,?,?);");
         preparedStatement.setInt(1,record.getQuizID());
         preparedStatement.setInt(2,record.getUserID());
         preparedStatement.setString(3,startTm);
