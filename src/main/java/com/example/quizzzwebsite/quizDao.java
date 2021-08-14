@@ -296,7 +296,7 @@ public class quizDao {
     public static int getNumAttempts() throws SQLException {
         if(numAttemptsChanged){
             Connection con = DataSrc.getConnection();
-            PreparedStatement statement = con.prepareStatement("select * from quiz;");
+            PreparedStatement statement = con.prepareStatement("select * from historyTable;");
             ResultSet rs = statement.executeQuery();
             if(rs == null){
                 return 0;
