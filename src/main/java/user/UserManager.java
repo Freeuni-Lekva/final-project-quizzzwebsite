@@ -13,7 +13,7 @@ import java.util.List;
 
 public class UserManager {
     private static Connection con;
-    private static boolean numUsersChanged = false;
+    private static boolean numUsersChanged = true;
     private static int numUsers = 0;
 
     public static User getUser(String email, String password) throws SQLException {

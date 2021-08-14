@@ -10,9 +10,9 @@ import DBConnect.DataSrc;
 
 public class quizDao {
     private static int numQuizzes = 0;
-    private static boolean numQuizzesChanged = false;
+    private static boolean numQuizzesChanged = true;
     private static int numAttempts = 0;
-    private static boolean numAttemptsChanged = false;
+    private static boolean numAttemptsChanged = true;
     private static final String DATABASE_NAME="quiz";
     private static final String QUIZ_TABLE_NAME="quiz";
     private static final String QUESTION_TABLE_NAME="question";
