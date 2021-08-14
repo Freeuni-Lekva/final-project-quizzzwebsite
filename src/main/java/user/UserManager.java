@@ -39,6 +39,34 @@ public class UserManager {
         return user;
     }
 
+    public static List<User> getAllUsers() throws SQLException {
+        PreparedStatement statement = null;
+        List<User> users = new ArrayList<User>();
+        ResultSet rs = null;
+        try{
+            con = DataSrc.getConnection();
+            statement = con.prepareStatement("select * from users;");
+            rs = statement.executeQuery();
+            if(rs == null){
+                return null;
+            }
+            while(rs.next()){
+                users.add(new User(rs.getInt(1) ,
+                        rs.getString("userName"),
+                        rs.getString(2),
+                        rs.getBoolean(5)));
+            }
+        }finally{
+            try { if (rs != null) rs.close(); }
+            catch (Exception e) {e.printStackTrace();};
+            try { if (statement != null) statement.close(); }
+            catch (Exception e) {e.printStackTrace();};
+            try { if (con != null) con.close(); }
+            catch (Exception e) {e.printStackTrace();};
+        }
+        return users;
+    }
+
     public static User registerUser(String userName, String email, String password) throws SQLException{
         if(emailRegistered(email) || userNameUsed(userName) || password == null) {
             return null;
@@ -148,5 +176,4 @@ public class UserManager {
         }
         return buff.toString();
     }
-
 }
