@@ -107,7 +107,7 @@ public class UserRelationManager {
         PreparedStatement statement = null;
         try {
             con = DataSrc.getConnection();
-            statement = con.prepareStatement("select from userFriendships where username1 = ?");
+            statement = con.prepareStatement("select * from userFriendships where username1 = ?");
             statement.setString(1, userName);
             rs = statement.executeQuery();
             while(rs.next()) {
@@ -115,7 +115,7 @@ public class UserRelationManager {
             }
             statement.close();
             rs.close();
-            statement = con.prepareStatement("select from userFriendships where username2 = ?");
+            statement = con.prepareStatement("select * from userFriendships where username2 = ?");
             statement.setString(1, userName);
             rs = statement.executeQuery();
             while(rs.next()) {

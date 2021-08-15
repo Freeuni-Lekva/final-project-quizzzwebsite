@@ -103,7 +103,7 @@
             </div>
             <br>
             <button type="submit" class="btn" value="submit">Create</button>
-            <a class="back" href="<%= jspName %>" >Back</a>
+            <a class="back" href="Home.jsp" >Back</a>
         </form>
     </div></div></div></div>
 
