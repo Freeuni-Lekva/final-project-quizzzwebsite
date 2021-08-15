@@ -1,6 +1,7 @@
 <%@ page import="user.User" %>
 <%@ page import="user.UserRelationManager" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="com.example.quizzzwebsite.quizDao" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <html>
@@ -40,23 +41,11 @@
         User tmp= (User) request.getSession().getAttribute(User.ATTRIBUTE_NAME);
         out.println(tmp.getUserName());
     %></h1>
-    <label>Ranking: </label><br>
-    <label>Total Score: </label><br>
-    <label>Number Of Created Quizzes: </label><br>
-    <label>Number of Written Quizzes: </label><br>
-    <label>Number of Friends: <%
-        User t= (User) request.getSession().getAttribute(User.ATTRIBUTE_NAME);
-        try {
-            out.println(UserRelationManager.getFriendList(t.getUserName()).size());
-        } catch (SQLException throwables) {
-            request.getRequestDispatcher("Error.jsp?id=\"Profile.jsp\"");
-        }
-
-    %></label><br>
+    <label>Total Score: <%=quizDao.getUserTotalScore(tmp.getId())%></label><br>
+    <label>Number Of Created Quizzes: <%=quizDao.getUserQuizzes(tmp.getId()).size()%></label><br>
+    <label>Number of Written Quizzes: <%=quizDao.getRecordsByUserID(tmp.getId()).size()%></label><br>
+    <label>Number of Friends: <%=UserRelationManager.getFriendList(tmp.getUserName()).size() %></label><br>
     <label>Achievements : </label><br>
 </div>
-
-
-
 </body>
 </html>
