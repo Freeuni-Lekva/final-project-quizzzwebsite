@@ -133,6 +133,33 @@ public class UserRelationManager {
         return result;
     }
 
+    public static void deleteUserRelations(String userName) throws SQLException {
+        PreparedStatement statement1 = null;
+        PreparedStatement statement2 = null;
+        PreparedStatement statement3 = null;
+        PreparedStatement statement4 = null;
+
+        try{
+            con = DataSrc.getConnection();
+            statement1 = con.prepareStatement("delete from friendshipRequests where requestorUsername = ?");
+            statement1.setString(1, userName);
+            statement1.executeUpdate();
+            statement2 = con.prepareStatement("delete from friendshipRequests where requesteeUsername = ?");
+            statement2.setString(1,userName);
+            statement2.executeUpdate();
+            statement3 = con.prepareStatement("delete from userFriendships where username1 = ?");
+            statement3.setString(1,userName);
+            statement4 = con.prepareStatement("delete from userFriendships where username2 = ?");
+            statement3.setString(1,userName);
+        }finally{
+            try { if (statement1 != null) statement1.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (statement2 != null) statement2.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (statement3 != null) statement3.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (statement4 != null) statement4.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
+        }
+    }
+
     public static List<String> getSentRequestList(String userName) throws SQLException {
         List<String> result = new ArrayList<>();
         ResultSet rs = null;

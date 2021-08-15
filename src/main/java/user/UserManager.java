@@ -98,6 +98,29 @@ public class UserManager {
         return users;
     }
 
+    public static User userByName(String userName) throws SQLException {
+        ResultSet rs = null;
+        User user = null;
+        PreparedStatement statement = null;
+        try {
+            con = DataSrc.getConnection();
+            statement = con.prepareStatement("select * from users where userName = ?");
+            statement.setString(1, userName);
+            rs = statement.executeQuery();
+            while(rs.next()) {
+                user = new User(rs.getInt(1) ,
+                        rs.getString("userName"),
+                        rs.getString(2),
+                        rs.getBoolean(5));
+            }
+        } finally {
+            try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
+        }
+        return user;
+    }
+
     public static List<User> getUserByName(String userName) throws SQLException{
         List<User> users = new ArrayList<User>();
         ResultSet rs = null;
@@ -193,7 +216,7 @@ public class UserManager {
                 return false;
             }
             quizDao.removeRecordsByUserID(userId);
-
+            UserRelationManager.deleteUserRelations(userName);
             statement2 = con.prepareStatement("delete from users where userName = ?;");
             statement2.setString(1,userName);
             statement2.execute();
