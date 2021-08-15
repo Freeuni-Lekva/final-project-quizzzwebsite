@@ -2,6 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="user.UserRelationManager" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="com.example.quizzzwebsite.quizDao" %>
+<%@ page import="user.UserManager" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <html>
@@ -51,7 +53,7 @@
             if(friends!=null) {
                 if(friends.size()!=0) {
                     for (String curr : friends) {
-                        out.println("<li><a href=\"FriendsProfile.jsp?id=" + curr + "\">" + curr + "</a><button type=\"submit\" id=" + curr + "\">Remove</button></li>");
+                        out.println("<li><a href=\"FriendsProfile.jsp?id=" + curr + "\">" + curr + "</a><form action=\"FriendServlet\" method=\"get\"> <input type=\"hidden\" name=\"removeFriend\" value=\"" + curr + "\"> <button type=\"submit\" id=" + curr + "\">Remove</button><form></li>");
                     }
                 }else{
                     out.println("<li>"+"No friends"+"</li>");
@@ -73,14 +75,15 @@
 </div>
 
     <div class="friend-profile">
-        <h1>Name</h1>
-        <label>Gender: </label><br>
-        <label>Ranking: </label><br>
-        <label>Total Score: </label><br>
-        <label>Number Of Created Quizzes: </label><br>
-        <label>Number of Written Quizzes: </label><br>
-        <label>Number of Friends: </label><br>
-        <button type="submit"  >Challenge</button>
+        <% String name = request.getParameter("id");
+            User user = UserManager.userByName(name);
+            int userId = user.getId();
+        %>
+        <h1><% out.println(name); %></h1>
+        <label>Total Score: <%=quizDao.getUserTotalScore(userId)%></label><br>
+        <label>Number Of Created Quizzes: <%=quizDao.getUserQuizzes(userId).size()%></label><br>
+        <label>Number of Written Quizzes: <%=quizDao.getRecordsByUserID(userId).size()%></label><br>
+        <label>Number of Friends: <%=UserRelationManager.getFriendList(name).size() %></label><br>
 
     </div>
 
