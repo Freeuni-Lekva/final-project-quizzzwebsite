@@ -162,7 +162,7 @@ public class quizDao {
         rs = statement.executeQuery();
         while(rs.next()){
             list.add(new getQuiz(rs.getInt("quizId"),rs.getString("name"),rs.getInt("creatorId"),
-                    rs.getTimestamp("created"),rs.getString("description"),
+                    Timestamp.valueOf(rs.getString("created")),rs.getString("description"),
                     rs.getBoolean("pages"),rs.getBoolean("practice"),
                     rs.getBoolean("correct"),rs.getBoolean("random")));
         }
@@ -182,7 +182,7 @@ public class quizDao {
         rs = statement.executeQuery();
         while(rs.next()){
             list.add(new getQuiz(rs.getInt("quizId"),rs.getString("name"),rs.getInt("creatorId"),
-                    rs.getTimestamp("created"),rs.getString("description"),
+                    Timestamp.valueOf(rs.getString("created")),rs.getString("description"),
                     rs.getBoolean("pages"),rs.getBoolean("practice"),
                     rs.getBoolean("correct"),rs.getBoolean("random")));
         }

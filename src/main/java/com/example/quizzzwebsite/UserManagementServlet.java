@@ -17,7 +17,43 @@ public class UserManagementServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName = request.getParameter("userName");
         String buttonType = request.getParameter("buttonType");
-
+        String name = request.getParameter("potFriendName");
+        if(name != null){
+            PrintWriter out = response.getWriter();
+            User user = (User)request.getSession().getAttribute(User.ATTRIBUTE_NAME);
+            try {
+                List<User> list = UserManager.getUserByName(name);
+                String respText = "<ul id=\"foundUsers\">";
+                for(int i = 0;i < list.size();i++){
+                    User curr = list.get(i);
+                    if(curr.isAdmin() || curr.getUserName().equals(user.getUserName())){
+                        respText += "<li>"
+                                +curr.getUserName()
+                                + "</li>";
+                    }else {
+                        respText +=
+                                "<li>"
+                                        + curr.getUserName()
+                                        + "<form action=\"FriendServlet\" method=\"get\">"
+                                        + "<input type=\"hidden\" name=\"sendRequest\" value=\"" + curr.getUserName() + "\">"
+                                        + "<button id=\"addFriend\" name=\"addFriend\"> Add Friend </button>"
+                                        + "</form>"
+                                        + "<form action=\"FriendServlet\" method=\"get\">"
+                                        + "<input type=\"hidden\" name=\"removeRequest\" value=\"" + curr.getUserName() + "\">"
+                                        + "<button id=\"removeReq\" name=\"removeReq\"> Remove Request </button>"
+                                        + "</form>"
+                                        + "</li>";
+                    }
+                }
+                respText += "</ul>";
+                out.write(respText);
+                return;
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                response.sendRedirect("Error.jsp?id=userManagement.jsp");
+                return;
+            }
+        }
         if(buttonType == null){
             PrintWriter out = response.getWriter();
             try {
