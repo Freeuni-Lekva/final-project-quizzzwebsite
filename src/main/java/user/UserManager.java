@@ -112,7 +112,6 @@ public class UserManager {
             try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
         }
         numUsers++;
-        numUsersChanged = true;
         return user;
     }
 
@@ -176,7 +175,6 @@ public class UserManager {
             try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
         }
         numUsers--;
-        numUsersChanged = true;
         return true;
     }
 

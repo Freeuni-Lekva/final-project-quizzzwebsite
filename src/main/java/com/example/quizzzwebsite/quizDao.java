@@ -190,7 +190,6 @@ public class quizDao {
         prepStat2.setInt(1,ID);
         prepStat2.executeUpdate();
         numQuizzes--;
-        numQuizzesChanged = true;
         removeRecordsByQuizID(ID);
 
     }
@@ -210,7 +209,6 @@ public class quizDao {
         preparedStatement.setInt(6,record.getMaxScore());
         preparedStatement.executeUpdate();
         numAttempts++;
-        numAttemptsChanged = true;
     }
 
     // removes all records about particular quiz

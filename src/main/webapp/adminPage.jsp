@@ -1,5 +1,6 @@
 <%@ page import="user.UserManager" %>
 <%@ page import="com.example.quizzzwebsite.quizDao" %>
+<%@ page import="com.example.quizzzwebsite.AnnouncementManager" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -24,22 +25,28 @@
       <th> Number of Users </th>
       <th> Number of Quizzes </th>
       <th> Number of Quiz attempts </th>
+      <th> Number of Announcements </th>
     </tr>
     <tr>
       <th><%=UserManager.getNumUsers()%></th>
       <th><%=quizDao.getNumQuizzes()%></th>
       <th><%=quizDao.getNumAttempts()%> </th>
+      <th><%=AnnouncementManager.getNumAnnouncements()%></th>
     </tr>
   </table>
 </div>
 <br>
 <div id="announcements">
   <h1>Create an Announcement</h1>
-  <form>
+
+  <form action="adminServlet" method="post">
     <br>
-    <textArea id = "announcement" cols = "20" rows = "10" placeholder="Enter text here"></textArea>
+    <input name="title" placeholder="Enter title">
     <br>
-    <button type = "submit"> Announce </button>
+    <br>
+    <textArea name="text" cols = "20" rows = "10" placeholder="Enter text here"></textArea>
+    <br>
+    <button type="submit"> Announce </button>
   </form>
 </div>
 

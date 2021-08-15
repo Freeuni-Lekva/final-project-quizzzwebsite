@@ -75,6 +75,7 @@ public class QuizCreationServlet extends HttpServlet {
                 reqDisp=request.getRequestDispatcher("SuccessfulCreation.jsp");
                 reqDisp.forward(request, response);
             } catch (SQLException | ClassNotFoundException throwables){
+                throwables.printStackTrace();
                 response.sendRedirect("Error.jsp?id=QuizCreationPage.jsp");
                 return;
             }
