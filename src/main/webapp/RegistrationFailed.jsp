@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container">
-    <form action="RegistrationServlet" method="post">
+    <form action="RegistrationServlet" method="get">
         <label class="Registration">Please Try Again!</label><br>
         <input type="text" id="name" name="username" placeholder="Enter Username">
 

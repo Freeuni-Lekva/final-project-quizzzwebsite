@@ -10,7 +10,7 @@
 <div class="Welcome">
     <div class="Sign-in-box">
         <label >Sign in</label><br>
-           <form action="LoginServlet" method="post">
+           <form action="LoginServlet" method="get">
              <input type="email"  placeholder="Enter email" name="email"/>
              <input  type="password"  placeholder="Enter Password" name="password" />
              <button class="Sign-in" id="btn" type="submit" >Sign in</button>

@@ -156,6 +156,26 @@ public class quizDao {
         return list;
     }
 
+    public static List<getQuiz> getQuizzes(int number) throws SQLException, ClassNotFoundException {
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        List<getQuiz> list = new ArrayList<getQuiz>();
+        Connection con = DataSrc.getConnection();
+        statement = con.prepareStatement("select * from " + QUIZ_TABLE_NAME + " limit ?;");
+        statement.setInt(1,number);
+        rs = statement.executeQuery();
+        while(rs.next()){
+            list.add(new getQuiz(rs.getInt("quizId"),rs.getString("name"),rs.getInt("creatorId"),
+                    rs.getTimestamp("created"),rs.getString("description"),
+                    rs.getBoolean("pages"),rs.getBoolean("practice"),
+                    rs.getBoolean("correct"),rs.getBoolean("random")));
+        }
+        if(statement != null)statement.close();
+        if(rs != null)rs.close();
+        if(con != null)con.close();
+        return list;
+    }
+
     private static List<String> getList (String str) {
         List<String > res=new ArrayList<String>();
         if(str.equals(null))return res;
@@ -190,7 +210,6 @@ public class quizDao {
         prepStat2.setInt(1,ID);
         prepStat2.executeUpdate();
         numQuizzes--;
-        numQuizzesChanged = true;
         removeRecordsByQuizID(ID);
 
     }
@@ -210,7 +229,6 @@ public class quizDao {
         preparedStatement.setInt(6,record.getMaxScore());
         preparedStatement.executeUpdate();
         numAttempts++;
-        numAttemptsChanged = true;
     }
 
     // removes all records about particular quiz
