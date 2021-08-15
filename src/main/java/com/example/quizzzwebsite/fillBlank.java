@@ -15,12 +15,13 @@ public class fillBlank implements question{
     @Override
     public String getHtmlTag() {
         String textFields= StaticVariables.EMPTY_STRING;
+        String hiddentype = "<input type=\"hidden\" class=\"type\" value=\""
+                + StaticVariables.FILL_BLANK_NUM + "\">";
         for(int i=0; i<correctAnswers.size();i++){
-            String tmName= StaticVariables.FILL_BLANK_NUM+ StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME+questionID+ StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME;
-            tmName+=i;
-            textFields+="<h3>input answer:<input type=\"text\" name=\""+tmName+"\"/></h3><br>";
+            String tmName= "blank";
+            textFields+="<h3>input answer:<input type=\"text\" class=\""+tmName+"\"/></h3><br>";
         }
-        String result="<div class=\"container\">"+"<h2>"+questionID+". "+"\" \""+questionText+"</h2><br>"+textFields+"</div>";
+        String result="<div class=\"container\">"+ hiddentype +"<h2>"+questionID+". "+"\" \""+questionText+"</h2><br>"+textFields+"</div>";
 
         return result;
     }
@@ -37,6 +38,11 @@ public class fillBlank implements question{
     public int getQuestionID(){
 
         return questionID;
+    }
+
+    @Override
+    public int getType() {
+        return StaticVariables.FILL_BLANK_NUM;
     }
 
 

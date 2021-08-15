@@ -7,5 +7,5 @@ public interface question {
     List<String> getCorrectAnswer();
     void setQuestionID(int id);
     int getQuestionID();
-
+    int getType();
 }

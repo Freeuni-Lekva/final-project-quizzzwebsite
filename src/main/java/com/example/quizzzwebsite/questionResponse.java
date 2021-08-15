@@ -20,13 +20,15 @@ public class questionResponse implements  question{
     }
     @Override
     public String getHtmlTag(){
-       String radioButtons= StaticVariables.EMPTY_STRING;
+        String radioButtons= StaticVariables.EMPTY_STRING;
+        String hiddentype = "<input type=\"hidden\" class=\"type\" value=\""
+                + StaticVariables.QUESTION_RESPONSE_NUM + "\">";
         for(int i=0; i<probableAnswers.size(); i++){
             String tmAnswer=probableAnswers.get(i);
-            String tmName= StaticVariables.QUESTION_RESPONSE_NUM+ StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME+getQuestionID();
-            radioButtons+="<input type=\"radio\" name=\""+tmName+"\" value=\""+probableAnswers.get(i)+"\"><label for=\""+tmName+"\">" +" "+probableAnswers.get(i)+"</label><br>";
+            String tmName= "radiobutton";
+            radioButtons+="<input type=\"radio\" class=\""+tmName+"\" value=\""+probableAnswers.get(i)+"\"><label for=\""+tmName+"\">" +" "+probableAnswers.get(i)+"</label><br>";
         }
-        String result="<div class=\"container\">"+"<h2>"+questionID+". "+"\" \""+questionText+"</h2><br>"+radioButtons+"</div><br>";
+        String result="<div class=\"container\">"+hiddentype+"<h2>"+questionID+". "+"\" \""+questionText+"</h2><br>"+radioButtons+"</div><br>";
         return result;
     }
 
@@ -44,6 +46,11 @@ public class questionResponse implements  question{
     public int getQuestionID(){
 
         return questionID;
+    }
+
+    @Override
+    public int getType() {
+        return StaticVariables.PICTURE_RESPONSE_NUM;
     }
 
 }
