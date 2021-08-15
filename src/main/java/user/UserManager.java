@@ -13,7 +13,8 @@ import java.util.List;
 
 public class UserManager {
     private static Connection con;
-
+    private static boolean numUsersChanged = true;
+    private static int numUsers = 0;
 
     public static User getUser(String email, String password) throws SQLException {
         if(!emailRegistered(email)) {
@@ -110,6 +111,8 @@ public class UserManager {
             try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
         }
+        numUsers++;
+        numUsersChanged = true;
         return user;
     }
 
@@ -172,6 +175,8 @@ public class UserManager {
             try { if (statement2 != null) statement2.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
         }
+        numUsers--;
+        numUsersChanged = true;
         return true;
     }
 
@@ -257,5 +262,22 @@ public class UserManager {
             buff.append(Integer.toString(val, 16));
         }
         return buff.toString();
+    }
+
+    public static int getNumUsers() throws SQLException {
+        if(numUsersChanged){
+            con = DataSrc.getConnection();
+            PreparedStatement statement = con.prepareStatement("select * from users;");
+            ResultSet rs = statement.executeQuery();
+            if(rs == null){
+                return 0;
+            }
+            numUsers = 0;
+            while(rs.next()){
+                numUsers++;
+            }
+            numUsersChanged = false;
+        }
+        return numUsers;
     }
 }
