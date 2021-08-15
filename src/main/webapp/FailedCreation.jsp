@@ -15,12 +15,11 @@
 
 <div class="container1">
 
-        <h1  align="center">Unfortunately com.example.quizzzwebsite.quiz didn't registered. It was not valid</h1>
+        <h1  align="center">Unfortunately quiz didn't registered. It was not valid</h1>
         <h1 align="center">Try it again</h1>
 
 </div>
 </body>
-<a class="back" href="QuizCreationPage.jsp" >Back</a>
-
+        <a class="back" href="QuizCreationPage.jsp" >Back</a>
 </html>
 
