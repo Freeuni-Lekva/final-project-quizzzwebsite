@@ -35,14 +35,42 @@
         <li><a href="Welcome.jsp">Sign out</a></li>
     </ul>
 </div>
-
+<div class="requests">
+    <label>
+        you have got requests from:
+        <br>
+        <br>
+    </label>
+    <%
+        out.println("<ul id=\"recRequests\">");
+        User tmp= (User) request.getSession().getAttribute(User.ATTRIBUTE_NAME);
+        List<String> list = null;
+        try {
+            list = UserRelationManager.getReceivedRequestList(tmp.getUserName());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        if(list != null){
+            if(list.size() == 0){
+                out.println("<li> No Requests Received </li>");
+            }
+            for(int i = 0;i < list.size();i++){
+                out.println("<li>"
+                            + list.get(i)
+                            + "<form action=\"FriendServlet\" method=\"get\">"
+                            + "<input type=\"hidden\" name=\"requestorName\" value=\"" + list.get(i) + "\">"
+                            + "<button type=\"submit\" id=\"acceptRequest\" name=\"acceptRequest>\"> Accept Request </button>"
+                            + "<form>"
+                        + "</li>");
+            }
+        }
+        out.println("</ul>");
+    %>
+</div>
 <div class="friends-bar">
     <ul>
 
         <%
-
-            User tmp= (User) request.getSession().getAttribute(User.ATTRIBUTE_NAME);
-
             List<String> friends = null;
             try {
                 friends = UserRelationManager.getFriendList(tmp.getUserName());
@@ -67,7 +95,6 @@
     <form >
         <input type="text" placeholder="Search Friend"/>
         <button type="submit"  >Search</button>
-
     </form>
 </div>
 

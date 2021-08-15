@@ -20,20 +20,30 @@ public class UserManagementServlet extends HttpServlet {
         String name = request.getParameter("potFriendName");
         if(name != null){
             PrintWriter out = response.getWriter();
+            User user = (User)request.getSession().getAttribute(User.ATTRIBUTE_NAME);
             try {
                 List<User> list = UserManager.getUserByName(name);
                 String respText = "<ul id=\"foundUsers\">";
                 for(int i = 0;i < list.size();i++){
                     User curr = list.get(i);
-
-                    respText +=
-                            "<li>"
-                                    + curr.getUserName()
-                                    + curr.getId()
-                                    + "<form action=\"FriendServlet\" method=\"get\">"
-                                    + "<button id=\"addFriend\" name=\"addFriend\"> Add Friend </button>"
-                                    + "</form>"
-                            + "</li>";
+                    if(curr.isAdmin() || curr.getUserName().equals(user.getUserName())){
+                        respText += "<li>"
+                                +curr.getUserName()
+                                + "</li>";
+                    }else {
+                        respText +=
+                                "<li>"
+                                        + curr.getUserName()
+                                        + "<form action=\"FriendServlet\" method=\"get\">"
+                                        + "<input type=\"hidden\" name=\"sendRequest\" value=\"" + curr.getUserName() + "\">"
+                                        + "<button id=\"addFriend\" name=\"addFriend\"> Add Friend </button>"
+                                        + "</form>"
+                                        + "<form action=\"FriendServlet\" method=\"get\">"
+                                        + "<input type=\"hidden\" name=\"removeRequest\" value=\"" + curr.getUserName() + "\">"
+                                        + "<button id=\"removeReq\" name=\"removeReq\"> Remove Request </button>"
+                                        + "</form>"
+                                        + "</li>";
+                    }
                 }
                 respText += "</ul>";
                 out.write(respText);

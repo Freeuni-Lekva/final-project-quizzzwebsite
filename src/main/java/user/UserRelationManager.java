@@ -23,6 +23,7 @@ public class UserRelationManager {
             statement.setString(1, sender);
             statement.setString(2, receiver);
             statement.setTimestamp(3, date);
+            statement.executeUpdate();
         } finally {
             try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
         }
@@ -55,8 +56,7 @@ public class UserRelationManager {
         }
         try {
             con = DataSrc.getConnection();
-            PreparedStatement statement = con.prepareStatement("delete from friendshipRequests where" +
-                    "requestorUsername = ? and receiverUsername = ?");
+            PreparedStatement statement = con.prepareStatement("delete from friendshipRequests where + requestorUsername = ? and requesteeUsername = ?;");
             statement.setString(1,sender);
             statement.setString(2, receiver);
             statement.executeUpdate();
@@ -135,12 +135,14 @@ public class UserRelationManager {
         ResultSet rs = null;
         PreparedStatement statement = null;
         try {
+            System.out.println(userName);
             con = DataSrc.getConnection();
-            statement = con.prepareStatement("select from friendshipRequests where requesteeUsername = ?");
+            statement = con.prepareStatement("select * from friendshipRequests where requesteeUsername = ?");
             statement.setString(1, userName);
             rs = statement.executeQuery();
             while (rs.next()) {
-                result.add(rs.getString(1));
+                System.out.println("cool");
+                result.add(rs.getString("requestorUsername"));
             }
         } finally {
             try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
@@ -157,7 +159,7 @@ public class UserRelationManager {
         boolean result = false;
         try {
             con = DataSrc.getConnection();
-            statement = con.prepareStatement("select from friendshipRequests where requestorUsername = ? and receiverUsername = ?");
+            statement = con.prepareStatement("select * from friendshipRequests where requestorUsername = ? and requesteeUsername = ?");
             statement.setString(1, sender);
             statement.setString(2, receiver);
             rs = statement.executeQuery();
@@ -178,7 +180,7 @@ public class UserRelationManager {
         boolean result = false;
         try {
             con = DataSrc.getConnection();
-            statement = con.prepareStatement("select from userFriendships where username1 = ? and username2 = ?");
+            statement = con.prepareStatement("select * from userFriendships where username1 = ? and username2 = ?");
             statement.setString(1, userName1);
             statement.setString(2, userName2);
             rs = statement.executeQuery();
@@ -187,7 +189,7 @@ public class UserRelationManager {
             }
             statement.close();
             rs.close();
-            statement = con.prepareStatement("select from userFriendships where username1 = ? and username2 = ?");
+            statement = con.prepareStatement("select * from userFriendships where username1 = ? and username2 = ?");
             statement.setString(2, userName1);
             statement.setString(1, userName2);
             rs = statement.executeQuery();
