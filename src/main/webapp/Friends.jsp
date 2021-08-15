@@ -60,8 +60,8 @@
             }
         %>
     </ul>
-
 </div>
+
 
 <div class="search">
     <form >
@@ -69,8 +69,45 @@
         <button type="submit"  >Search</button>
 
     </form>
-
 </div>
 
+<div class="otherUsers" id="otherUsers">
+    <ul id="foundUsers">
+    </ul>
+    <form action="UserManagementServlet" method="get" onsubmit="searchUsers(); return false">
+        <input id="potFriendName" name="potFriendName" type="text" placeholder="Enter Username">
+        <button type="submit" id="searchButton"> Search </button>
+    </form>
+    <script type="text/javascript">
+        function searchUsers() {
+            let userlist = document.getElementById("foundUsers");
+            let parent = userlist.parentElement;
+            parent.removeChild(userlist);
+            let req = null;
+            try {
+                req = new XMLHttpRequest();
+            } catch (e) {
+                req = new ActiveXObject();
+            }
+            if (req == null) {
+                alert("ajax not supported");
+            }
+            req.onreadystatechange = handler;
+            let url = "UserManagementServlet?potFriendName=" + document.getElementById("potFriendName").value;
+            req.open("get", url);
+            req.send(null);
+
+            function handler() {
+                if (req.readyState == 4) {
+                    if (req.status == 200) {
+                        document.getElementById("otherUsers").insertAdjacentHTML("beforeend", req.responseText);
+                    } else {
+                        alert("ajax erred my friend");
+                    }
+                }
+            }
+        }
+    </script>
+</div>
 </body>
 </html>

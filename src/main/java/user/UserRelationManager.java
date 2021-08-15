@@ -35,7 +35,7 @@ public class UserRelationManager {
         boolean result = false;
         try {
             con = DataSrc.getConnection();
-            statement = con.prepareStatement("select from users where userName = ?");
+            statement = con.prepareStatement("select * from users where userName = ?");
             statement.setString(1, userName);
             rs = statement.executeQuery();
             if(rs.next()) {
