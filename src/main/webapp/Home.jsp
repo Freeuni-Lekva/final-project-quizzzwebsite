@@ -2,6 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.quizzzwebsite.AnnouncementManager" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="com.example.quizzzwebsite.quizDao" %>
+<%@ page import="com.example.quizzzwebsite.getQuiz" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <html>
@@ -41,7 +43,30 @@
     <div class="leaderboard">
         <div class="title1"> Leaderboard</div>
         <ul>
-
+            <%
+                List<getQuiz> quizList = null;
+                try {
+                    quizList = quizDao.getQuizzes(10);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                if(quizList != null){
+                    if(quizList.size() == 0){
+                        out.println("<li> there are no quizzes </li>");
+                    }else{
+                        for(int i = 0;i < quizList.size();i++){
+                            getQuiz quiz = quizList.get(i);
+                            out.println("<li> Name: "
+                                        + quiz.getName() + "<br>"
+                                        + "CreatorId: " + quiz.getCreatorID() + "<br>"
+                                        + "Description: " + quiz.getDescription() + "<br>"
+                                        + "</li>");
+                        }
+                    }
+                }
+            %>
         </ul>
     </div>
     <div class="Announcements">
