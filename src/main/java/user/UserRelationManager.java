@@ -90,11 +90,14 @@ public class UserRelationManager {
         }
         try {
             con = DataSrc.getConnection();
-            PreparedStatement statement = con.prepareStatement("delete from userFriendships where" +
-                    "username1 = ? and username2 = ?");
-            statement.setString(1,userName1);
-            statement.setString(2, userName2);
-            statement.executeUpdate();
+            PreparedStatement statement1 = con.prepareStatement("delete from userFriendships where username1 = ? and username2 = ?;");
+            statement1.setString(1,userName1);
+            statement1.setString(2, userName2);
+            statement1.executeUpdate();
+            PreparedStatement statement2 = con.prepareStatement("delete from userFriendships where username1 = ? and username2 = ?;");
+            statement1.setString(1,userName2);
+            statement1.setString(2, userName1);
+            statement1.executeUpdate();
         } finally {
             try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
         }
@@ -130,18 +133,36 @@ public class UserRelationManager {
         return result;
     }
 
+    public static List<String> getSentRequestList(String userName) throws SQLException {
+        List<String> result = new ArrayList<>();
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        try{
+            con = DataSrc.getConnection();
+            statement = con.prepareStatement("select * from friendshipRequests where requestorUsername = ?");
+            statement.setString(1, userName);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                result.add(rs.getString("requesteeUsername"));
+            }
+        }finally{
+            try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
+        }
+        return result;
+    }
+
     public static List<String> getReceivedRequestList(String userName) throws SQLException {
         List<String> result = new ArrayList<>();
         ResultSet rs = null;
         PreparedStatement statement = null;
         try {
-            System.out.println(userName);
             con = DataSrc.getConnection();
             statement = con.prepareStatement("select * from friendshipRequests where requesteeUsername = ?");
             statement.setString(1, userName);
             rs = statement.executeQuery();
             while (rs.next()) {
-                System.out.println("cool");
                 result.add(rs.getString("requestorUsername"));
             }
         } finally {

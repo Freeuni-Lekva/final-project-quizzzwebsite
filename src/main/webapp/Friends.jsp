@@ -60,11 +60,49 @@
                             + "<form action=\"FriendServlet\" method=\"get\">"
                             + "<input type=\"hidden\" name=\"requestorName\" value=\"" + list.get(i) + "\">"
                             + "<button type=\"submit\" id=\"acceptRequest\" name=\"acceptRequest>\"> Accept Request </button>"
+                            + "</form>"
+                            + "<form action=\"FriendServlet\" method=\"get\">"
+                            + "<input type=\"hidden\" name=\"removeRequest\" value=\"" + list.get(i) + "\">"
+                            + "<button id=\"removeReq\" name=\"removeReq\"> Remove Request </button>"
                             + "<form>"
                         + "</li>");
             }
         }
         out.println("</ul>");
+    %>
+</div>
+<br>
+<br>
+<div class="sentRequests">
+    <label>
+        you have sent Requests to:
+        <br>
+        <br>
+    </label>
+    <%
+        List<String> reqs = null;
+        try {
+            reqs = UserRelationManager.getSentRequestList(tmp.getUserName());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        if(reqs != null){
+            out.println("<ul id=\"sentRequestsList\"");
+            if(reqs.size() == 0){
+                out.println("<li> you have not sent any Requests </li>");
+            }else{
+                for(int i = 0;i < reqs.size();i++){
+                    out.println("<li>"
+                            + reqs.get(i)
+                            + "<form action=\"FriendServlet\" method=\"get\">"
+                            + "<input type=\"hidden\" name=\"unsend\" value=\"" + reqs.get(i) + "\">"
+                            + "<button type=\"submit\" id=\"unsentRequest\" name=\"unsentRequest>\"> Unsend Request </button>"
+                            + "</form>"
+                            + "</li>");
+                }
+            }
+        }
     %>
 </div>
 <div class="friends-bar">
@@ -80,7 +118,7 @@
             if(friends!=null) {
                 if(friends.size()!=0) {
                     for (String curr : friends) {
-                        out.println("<li><a href=\"FriendsProfile.jsp?id=" + curr + "\">" + curr + "</a><button type=\"submit\" id=" + curr + "\">Remove</button></li>");
+                        out.println("<li><a href=\"FriendsProfile.jsp?id=" + curr + "\">" + curr + "</a><form action=\"FriendServlet\" method=\"get\"> <input type=\"hidden\" name=\"removeFriend\" value=\"" + curr + "\"> <button type=\"submit\" id=" + curr + "\">Remove</button><form></li>");
                     }
                 }else{
                     out.println("<li>"+"No friends"+"</li>");

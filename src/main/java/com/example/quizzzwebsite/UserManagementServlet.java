@@ -38,10 +38,6 @@ public class UserManagementServlet extends HttpServlet {
                                         + "<input type=\"hidden\" name=\"sendRequest\" value=\"" + curr.getUserName() + "\">"
                                         + "<button id=\"addFriend\" name=\"addFriend\"> Add Friend </button>"
                                         + "</form>"
-                                        + "<form action=\"FriendServlet\" method=\"get\">"
-                                        + "<input type=\"hidden\" name=\"removeRequest\" value=\"" + curr.getUserName() + "\">"
-                                        + "<button id=\"removeReq\" name=\"removeReq\"> Remove Request </button>"
-                                        + "</form>"
                                         + "</li>";
                     }
                 }
