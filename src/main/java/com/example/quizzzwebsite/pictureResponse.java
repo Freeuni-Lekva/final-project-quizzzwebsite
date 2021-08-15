@@ -15,12 +15,14 @@ public class pictureResponse implements question{
     @Override
     public String getHtmlTag(){
       String zeroIndex="0";
-        String name= StaticVariables.PICTURE_RESPONSE_NUM+ StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME+questionID+ StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME+zeroIndex;
+        String name= "answer";
+        String hiddentype = "<input type=\"hidden\" class=\"type\" value=\""
+                + StaticVariables.PICTURE_RESPONSE_NUM + "\">";
         String defaultText="photo com.example.quizzzwebsite.question";
         String head="<h2>"+questionID+ ". "+defaultText+"</h2><br>";
         String imgSet="<img src=\""+imigeAddress+"\"><br>";
-        String textField="<h3>input correct answer</h3><input type=\"text\" name=\""+name+"\"><br>";
-        String result="<div class=\"container\">"+head+imgSet+textField+"</div><br>";
+        String textField="<h3>input correct answer</h3><input type=\"text\" id=\""+name+"\"><br>";
+        String result="<div class=\"container\">"+hiddentype+head+imgSet+textField+"</div><br>";
         return result;
     }
 
@@ -36,6 +38,11 @@ public class pictureResponse implements question{
 
     public int getQuestionID(){
         return questionID;
+    }
+
+    @Override
+    public int getType() {
+        return StaticVariables.PICTURE_RESPONSE_NUM;
     }
 
 

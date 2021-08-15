@@ -149,4 +149,25 @@ public class UserManager {
         return buff.toString();
     }
 
+    public static String getUsernameById(int creatorID){
+        String user = null;
+        ResultSet rs = null;
+        PreparedStatement statement = null;
+        try {
+            con = DataSrc.getConnection();
+            statement = con.prepareStatement("select * from users where userId = ?");
+            statement.setInt(1, creatorID);
+            rs = statement.executeQuery();
+            if(rs.next()) {
+                user = rs.getString("userName");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try { if (rs != null) rs.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (statement != null) statement.close(); } catch (Exception e) {e.printStackTrace();};
+            try { if (con != null) con.close(); } catch (Exception e) {e.printStackTrace();};
+        }
+        return user;
+    }
 }

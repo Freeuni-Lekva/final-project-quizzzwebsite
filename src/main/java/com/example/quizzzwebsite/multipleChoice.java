@@ -21,13 +21,14 @@ public class multipleChoice implements question{
     @Override
     public String getHtmlTag(){
          String checkBoxes= StaticVariables.EMPTY_STRING;
+        String hiddentype = "<input type=\"hidden\" class=\"type\" value=\""
+                + StaticVariables.MULTIPLE_CHOICE_NUM + "\">";
         for(int i=0; i<probableAnswers.size(); i++){
             String tmAnswer=probableAnswers.get(i);
-            String tmName= StaticVariables.MULTIPLE_CHOICE_NUM+ StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME+questionID+ StaticVariables.DELIMITER_IN_QUESTION_FIELD_NAME;
-            tmName+=i;
-            checkBoxes+="<input type=\"checkbox\" name=\""+tmName+"\" value=\""+probableAnswers.get(i)+"\"><label for=\""+tmName+"\">" +" "+probableAnswers.get(i)+"</label><br>";
+            String tmName= "checkBox";
+            checkBoxes+="<input type=\"checkbox\" class=\""+tmName+"\" value=\""+probableAnswers.get(i)+"\"><label for=\""+tmName+"\">" +" "+probableAnswers.get(i)+"</label><br>";
         }
-        String result="<div class=\"container\">"+"<h2>"+questionID+". "+"\" \""+questionText+"</h2><br>"+checkBoxes+"</div><br>";
+        String result="<div id=\"container\">"+ hiddentype +"<h2>"+questionID+". "+"\" \""+questionText+"</h2><br>"+checkBoxes+"</div><br>";
         return result;
     }
 
@@ -47,6 +48,10 @@ public class multipleChoice implements question{
         return questionID;
     }
 
+    @Override
+    public int getType() {
+        return StaticVariables.MULTIPLE_CHOICE_NUM;
+    }
 
 
 }
