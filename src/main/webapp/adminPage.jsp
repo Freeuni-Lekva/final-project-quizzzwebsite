@@ -1,6 +1,7 @@
 <%@ page import="user.UserManager" %>
 <%@ page import="com.example.quizzzwebsite.quizDao" %>
 <%@ page import="com.example.quizzzwebsite.AnnouncementManager" %>
+<%@ page import="java.sql.SQLException"%>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -16,6 +17,9 @@
 <body>
 <h1>Admin Page</h1>
 <br>
+<a id="backButton" href="Welcome.jsp" >Sign Out</a>
+<br>
+<br>
 <div id="siteStatistics">
   <label> Site Statistics </label>
   <br>
@@ -30,44 +34,44 @@
     <tr>
       <th><%=UserManager.getNumUsers()%></th>
       <th><%=quizDao.getNumQuizzes()%></th>
-      <th><%=quizDao.getNumAttempts()%> </th>
+      <th><%=quizDao.getNumAttempts()%></th>
       <th><%=AnnouncementManager.getNumAnnouncements()%></th>
     </tr>
   </table>
-</div>
-<br>
-<div id="announcements">
-  <h1>Create an Announcement</h1>
-
-  <form action="adminServlet" method="post">
+  </div>
     <br>
-    <input name="title" placeholder="Enter title">
-    <br>
-    <br>
-    <textArea name="text" cols = "20" rows = "10" placeholder="Enter text here"></textArea>
-    <br>
-    <button type="submit"> Announce </button>
-  </form>
-</div>
+    <div id="announcements">
+      <h1>Create an Announcement</h1>
 
-<br>
+        <form action="adminServlet" method="post">
+          <br>
+          <input name="title" placeholder="Enter title">
+          <br>
+          <br>
+          <textArea name="text" cols = "20" rows = "10" placeholder="Enter text here"></textArea>
+          <br>
+          <button type="submit"> Announce </button>
+        </form>
+    </div>
 
-<div id="userManagement">
-  <label> Manage Users </label>
-  <br>
-  <br>
-  <form action="adminServlet" method="get">
-    <button name = "userManagementButton" type = "submit"> Manage users </button>
-  </form>
-</div>
+      <br>
 
-<div id="quizManagement">
-  <label> Manage Quizzes </label>
-  <br>
-  <br>
-  <form action="adminServlet" method="get">
-    <button name = "quizManagementButton" type = "submit"> Manage quizzes </button>
-  </form>
-</div>
-</body>
-</html>
+      <div id="userManagement">
+        <label> Manage Users </label>
+        <br>
+        <br>
+        <form action="adminServlet" method="get">
+          <button name = "userManagementButton" type = "submit"> Manage users </button>
+        </form>
+      </div>
+
+      <div id="quizManagement">
+        <label> Manage Quizzes </label>
+        <br>
+        <br>
+        <form action="adminServlet" method="get">
+          <button name = "quizManagementButton" type = "submit"> Manage quizzes </button>
+        </form>
+      </div>
+      </body>
+      </html>

@@ -16,7 +16,10 @@
 </head>
 <body>
 <h1> Manage Quizzes </h1>
-
+<br>
+<a id="backButton" href="adminPage.jsp" >Back</a>
+<br>
+<br>
 <form action="QuizManagementServlet" method="get" onsubmit="searchQuiz(); return false">
     <input id="quizName" name="quizName" type="text" placeholder="Enter Quiz name">
     <button type="submit" id="searchQuizzes"> Search </button>
@@ -33,7 +36,7 @@
         <%
             List<getQuiz> list = null;
             try {
-                list = quizDao.getAllQuizzes();
+                list = quizDao.getQuizzes(10);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
                 response.sendRedirect("Error.jsp?id=adminPage.jsp");

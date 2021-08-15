@@ -69,6 +69,35 @@ public class UserManager {
         return users;
     }
 
+    public static List<User> getUsers(int number) throws SQLException {
+        PreparedStatement statement = null;
+        List<User> users = new ArrayList<User>();
+        ResultSet rs = null;
+        try{
+            con = DataSrc.getConnection();
+            statement = con.prepareStatement("select * from users limit ?;");
+            statement.setInt(1,number);
+            rs = statement.executeQuery();
+            if(rs == null){
+                return null;
+            }
+            while(rs.next()){
+                users.add(new User(rs.getInt(1) ,
+                        rs.getString("userName"),
+                        rs.getString(2),
+                        rs.getBoolean(5)));
+            }
+        }finally{
+            try { if (rs != null) rs.close(); }
+            catch (Exception e) {e.printStackTrace();};
+            try { if (statement != null) statement.close(); }
+            catch (Exception e) {e.printStackTrace();};
+            try { if (con != null) con.close(); }
+            catch (Exception e) {e.printStackTrace();};
+        }
+        return users;
+    }
+
     public static List<User> getUserByName(String userName) throws SQLException{
         List<User> users = new ArrayList<User>();
         ResultSet rs = null;

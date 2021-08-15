@@ -1,3 +1,7 @@
+<%@ page import="com.example.quizzzwebsite.Announcement" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.quizzzwebsite.AnnouncementManager" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <html>
@@ -38,44 +42,31 @@
         <div class="title1"> Leaderboard</div>
         <ul>
 
-            <%  //example
-                out.println("<li>"+"petre"+"<p>"+"1988"+"</p></li>");
-                out.println("<li>"+"petre"+"<p>"+"198"+"</p></li>");
-                out.println("<li>"+"petre"+"<p>"+"1688"+"</p></li>");
-                out.println("<li>"+"petre"+"<p>"+"1588"+"</p></li>");
-                out.println("<li>"+"petre"+"<p>"+"1488"+"</p></li>");
-                out.println("<li>"+"petre"+"<p>"+"1388"+"</p></li>");
-                out.println("<li>"+"petre"+"<p>"+"1288"+"</p></li>");
-                out.println("<li>"+"petre"+"<p>"+"1188"+"</p></li>");
-                out.println("<li>"+"petre"+"<p>"+"1088"+"</p></li>");
-                out.println("<li>"+"petre"+"<p>"+"988"+"</p></li>");
-                out.println("<li>"+"petre"+"<p>"+"88"+"</p></li>");
-
-
-            /* get leaderboard and println as it is given in example
-                */
-            %>
         </ul>
     </div>
     <div class="Announcements">
+
         <div class="title2"> Announcements</div>
         <ul>
-        <%  //example
-            out.println("<li>"+" News..."+"</li>");
-
-            out.println("<li>"+"News..."+"</li>");
-            out.println("<li>"+"News..."+"</li>");
-            out.println("<li>"+"News..."+"</li>");
-            out.println("<li>"+"News..."+"</li>");
-            out.println("<li>"+"News..."+"</li>");
-            out.println("<li>"+"News..."+"</li>");
-            out.println("<li>"+"News..."+"</li>");
-            out.println("<li>"+"News..."+"</li>");
-            out.println("<li>"+"News..."+"</li>");
-            out.println("<li>"+"News..."+"</li>");
-            /* get Announcements and println as it is given in example
-             */
-        %>
+            <%
+                List<Announcement> list = null;
+                try {
+                    list = AnnouncementManager.getAnnouncements(10);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                    response.sendRedirect("Error.jsp?id=QuizCreationPage.jsp");
+                    return;
+                }
+                if(list != null) {
+                    for(int i = 0;i < list.size();i++) {
+                        out.println("<li> Title: " + list.get(i).getTitle());
+                        out.println("<br>");
+                        out.println("Announcement: ");
+                        out.println(list.get(i).getText());
+                        out.println("</li>");
+                    }
+                }
+            %>
         </ul>
      </div>
 </div>

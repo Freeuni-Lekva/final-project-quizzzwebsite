@@ -14,8 +14,9 @@ import java.io.IOException;
 
 @WebServlet("/RegistrationServlet")
 public class RegistrationServlet extends HttpServlet {
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String passWord = req.getParameter("password");
         String userName = req.getParameter("username");
@@ -39,6 +40,11 @@ public class RegistrationServlet extends HttpServlet {
             }
         }
         rd.forward(req, resp);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     }
 }

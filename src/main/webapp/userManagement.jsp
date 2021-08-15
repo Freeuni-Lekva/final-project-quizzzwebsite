@@ -15,11 +15,15 @@
 </head>
 <body>
 <h1> Manage Users </h1>
+<br>
+<a id="backButton" href="adminPage.jsp" >Back</a>
+<br>
+<br>
 <form action="UserManagementServlet" method="get" onsubmit="searchUser(); return false">
   <input id="userName" name="userName" type="text" placeholder="Enter User Name">
   <button type="submit" id="searchUsers"> Search </button>
 </form>
-<!-- <script type="text/javascript" src="searchUsers.js"></script> -->
+
 <script type="text/javascript">
   function searchUser() {
     console.log("it really logged something");
@@ -62,7 +66,7 @@
     <%
       List<User> users = null;
       try {
-        users = UserManager.getAllUsers();
+        users = UserManager.getUsers(20);
       } catch (SQLException throwables) {
         throwables.printStackTrace();
         response.sendRedirect("Error.jsp?id=adminPage.jsp");

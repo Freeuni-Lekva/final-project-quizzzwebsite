@@ -17,6 +17,7 @@ import java.util.List;
 public class AnnouncementManager {
     private static int numAnnouncements = 0;
     private static boolean numAnnouncementsChanged = true;
+
     public static void addAnnouncement(String title,String text,String userName) throws SQLException {
         Connection con = DataSrc.getConnection();
         PreparedStatement statement = con.prepareStatement("insert into announcements(title,creatorName,text,date)" +
@@ -33,6 +34,21 @@ public class AnnouncementManager {
         Connection con = DataSrc.getConnection();
         PreparedStatement statement = con.prepareStatement("select * from " +
                 "announcements order by date desc;");
+        ResultSet rs = statement.executeQuery();
+        List<Announcement> list = new ArrayList<Announcement>();
+        while(rs.next()){
+            list.add(new Announcement(rs.getString(1),
+                    rs.getString(3), rs.getString(4),
+                    rs.getDate(5)));
+        }
+        return list;
+    }
+
+    public static List<Announcement> getAnnouncements(int number) throws SQLException {
+        Connection con = DataSrc.getConnection();
+        PreparedStatement statement = con.prepareStatement("select * from " +
+                "announcements order by date desc limit ?;");
+        statement.setInt(1,number);
         ResultSet rs = statement.executeQuery();
         List<Announcement> list = new ArrayList<Announcement>();
         while(rs.next()){
