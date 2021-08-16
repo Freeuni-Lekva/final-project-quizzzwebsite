@@ -2,6 +2,7 @@ package com.example.quizzzwebsite;
 
 import user.User;
 import user.UserManager;
+import user.UserRelationManager;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -26,7 +27,10 @@ public class UserManagementServlet extends HttpServlet {
                 String respText = "<ul id=\"foundUsers\">";
                 for(int i = 0;i < list.size();i++){
                     User curr = list.get(i);
-                    if(curr.isAdmin() || curr.getUserName().equals(user.getUserName())){
+                    if(curr.isAdmin() || curr.getUserName().equals(user.getUserName()) ||
+                            UserRelationManager.areFriends(curr.getUserName(),user.getUserName())
+                            || UserRelationManager.isRequestSent(curr.getUserName(),user.getUserName())
+                            || UserRelationManager.isRequestSent(user.getUserName(),curr.getUserName())){
                         respText += "<li>"
                                 +curr.getUserName()
                                 + "</li>";

@@ -149,8 +149,10 @@ public class UserRelationManager {
             statement2.executeUpdate();
             statement3 = con.prepareStatement("delete from userFriendships where username1 = ?");
             statement3.setString(1,userName);
+            statement3.executeUpdate();
             statement4 = con.prepareStatement("delete from userFriendships where username2 = ?");
-            statement3.setString(1,userName);
+            statement4.setString(1,userName);
+            statement4.executeUpdate();
         }finally{
             try { if (statement1 != null) statement1.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (statement2 != null) statement2.close(); } catch (Exception e) {e.printStackTrace();};
