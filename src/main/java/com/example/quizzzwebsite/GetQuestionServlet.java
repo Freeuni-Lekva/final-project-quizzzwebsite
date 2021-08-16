@@ -39,6 +39,7 @@ public class GetQuestionServlet extends HttpServlet {
                 e.printStackTrace();
             }
             long diff = rec.getEndTime().getTime() - rec.getStartTime().getTime();
+            diff = diff/1000;
             PrintWriter pw = resp.getWriter();
             pw.print("<h2>your score is " + rec.getScore() + "</h2>");
             pw.print("<h2>" + diff + " seconds used</h2>");

@@ -46,7 +46,7 @@
             <%
                 List<getQuiz> quizList = null;
                 try {
-                    quizList = quizDao.getQuizzes(10);
+                    quizList = quizDao.getAllQuizzes();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 } catch (ClassNotFoundException e) {
