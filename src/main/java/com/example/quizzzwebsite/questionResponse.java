@@ -26,7 +26,8 @@ public class questionResponse implements  question{
         for(int i=0; i<probableAnswers.size(); i++){
             String tmAnswer=probableAnswers.get(i);
             String tmName= "radiobutton";
-            radioButtons+="<input type=\"radio\" class=\""+tmName+"\" value=\""+probableAnswers.get(i)+"\"><label for=\""+tmName+"\">" +" "+probableAnswers.get(i)+"</label><br>";
+            System.out.println(probableAnswers.get(i));
+            radioButtons+="<input type=\"radio\" name=\"rad\" class=\""+tmName+"\" value=\""+probableAnswers.get(i)+"\"><label for=\""+tmName+"\">" +" "+probableAnswers.get(i)+"</label><br>";
         }
         String result="<div class=\"container\">"+hiddentype+"<h2>"+questionID+". "+"\" \""+questionText+"</h2><br>"+radioButtons+"</div><br>";
         return result;
@@ -50,7 +51,7 @@ public class questionResponse implements  question{
 
     @Override
     public int getType() {
-        return StaticVariables.PICTURE_RESPONSE_NUM;
+        return StaticVariables.QUESTION_RESPONSE_NUM;
     }
 
 }
