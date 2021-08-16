@@ -14,7 +14,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Quiz</title>
+    <title>Quiz111</title>
     <%
         quiz quizToDisplay = (quiz)request.getSession().getAttribute("quiz");
         String creatorName = UserManager.getUsernameById(quizToDisplay.getCreatorID());
@@ -65,10 +65,11 @@
             } catch (e) {
                 xhr = new ActiveXObject("Microsoft.XMLHTTP");
             }
-            var url = "GetQuestionServlet?type=1";
+
             xhr.onreadystatechange =
                 function () {
                     if (xhr.readyState == 4) {
+                        alert(xhr.responseText);
                         if (xhr.status == 200) {
                             document.getElementById("container").innerHTML = "";
                             if(immediate == "1") {
@@ -79,14 +80,15 @@
                         }
                     }
                 }
-            xhr.open("POST", url, true);
             var blanks = document.getElementsByClassName("blank");
             var answers = "";
-            Array.prototype.forEach.call(blanks, function(blank) {
-                answers += blank.value();
-                answers += "~";
-            });
-            xhr.send("answer=" + answers);
+            for (var i = 0; i < blanks.length; i++) {
+                answers+=blanks[i].value;
+                answers+="~";
+            }
+            var url = "SubmitAnswerServlet?" + "answer=" + answers + "&type=1";
+            xhr.open("GET", url, true);
+            xhr.send(null);
         }
         function submitMultipleChoice() {
             var xhr = null;
@@ -95,7 +97,6 @@
             } catch (e) {
                 xhr = new ActiveXObject("Microsoft.XMLHTTP");
             }
-            var url = "GetQuestionServlet";
             xhr.onreadystatechange =
                 function () {
                     if (xhr.readyState == 4) {
@@ -111,14 +112,15 @@
                 }
             var boxes = document.getElementsByClassName("checkBox");
             var answers = "";
-            Array.prototype.forEach.call(boxes, function(box) {
-                if(box.checked()) {
-                    answers += box.value();
+            for (var i = 0; i < boxes.length; i++) {
+                if(boxes[i].checked) {
+                    answers += boxes[i].value;
                     answers += "~";
                 }
-            });
-            xhr.open("POST", url, true);
-            xhr.send("answer=" + answers);
+            }
+            var url = "SubmitAnswerServlet?" + "answer=" + answers + "&type=2";
+            xhr.open("GET", url, true);
+            xhr.send(null);
         }
         function submitPictureResponse() {
             var xhr = null;
@@ -127,7 +129,6 @@
             } catch (e) {
                 xhr = new ActiveXObject("Microsoft.XMLHTTP");
             }
-            var url = "GetQuestionServlet";
             xhr.onreadystatechange =
                 function () {
                     if (xhr.readyState == 4) {
@@ -142,8 +143,9 @@
                     }
                 }
             var answer = document.getElementById("answer");
-            xhr.open("POST", url, true);
-            xhr.send("answer=" + answer);
+            var url = "SubmitAnswerServlet?" + "answer=" + answer + "&type=3";
+            xhr.open("GET", url, true);
+            xhr.send(null);
         }
         function submitQuestionResponse() {
             var xhr = null;
@@ -152,10 +154,10 @@
             } catch (e) {
                 xhr = new ActiveXObject("Microsoft.XMLHTTP");
             }
-            var url = "GetQuestionServlet";
             xhr.onreadystatechange =
                 function () {
                     if (xhr.readyState == 4) {
+                        alert(xhr.responseText);
                         if (xhr.status == 200) {
                             document.getElementById("container").innerHTML = "";
                             if(immediate == "1") {
@@ -168,13 +170,15 @@
                 }
             var radiobuttons = document.getElementsByClassName("radiobutton");
             var answer = "";
-            Array.prototype.forEach.call(buttons, function(button) {
-                if(button.checked()) {
-                    answer += button.value();
+            for (var i = 0; i < radiobuttons.length; i+=1) {
+                if(radiobuttons[i].checked) {
+                    answer += radiobuttons.value;
                 }
-            });
-            xhr.open("POST", url, true);
-            xhr.send("answer=" + answer);
+            }
+            alert(answer);
+            var url = "SubmitAnswerServlet?" + "answer=" + answer + "&type=4";
+            xhr.open("GET", url, true);
+            xhr.send(null);
         }
         function displayNextQuestion() {
             var xhr = null;
@@ -196,7 +200,7 @@
                             document.getElementById("nextbutton").onclick = submitt;
                             var nextlabel = "next";
                             if(immediate) nextlabel = "submit";
-                            document.getElementById("nextbutton").value = nextlabel;
+                            document.getElementById("nextbutton").innerText = nextlabel;
                         }
                     }
                 }
@@ -218,6 +222,9 @@
                         if (xhr.status == 200) {
                             var div = "<div class=\"container\"> " + xhr.responseText + "</div>";
                             document.getElementById("container").insertAdjacentHTML("afterbegin", div);
+                            document.getElementById("nextbutton").remove();
+                            var home = "<a href=\"Home.jsp\">Home</a>";
+                            document.getElementById("container").insertAdjacentHTML("beforeend", home);
                         }
                     }
                 }
@@ -226,9 +233,10 @@
             xhr.send(null);
         }
         function displayQuestionMark(mark) {
+            document.getElementById("container").innerHTML = "";
             var div = "<div class=\"container\"> <h2> " + mark + " points on that question</h2></div>";
             document.getElementById("container").insertAdjacentHTML("afterbegin", div);
-            document.getElementById("nextbutton").value = "next";
+            document.getElementById("nextbutton").innerText = "next";
             document.getElementById("nextbutton").onclick = displayNextQuestion;
         }
     </script>
