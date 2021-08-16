@@ -62,6 +62,9 @@
                                         + quiz.getName() + "<br>"
                                         + "CreatorId: " + quiz.getCreatorID() + "<br>"
                                         + "Description: " + quiz.getDescription() + "<br>"
+                                        + "<form action=\"QuizDisplayServlet\" method=\"GET\">"
+                                        + "<input type=\"submit\" name=\"id\" value=\"" +quiz.getID()+ "\">"
+                                        + "</form>"
                                         + "</li>");
                         }
                     }
