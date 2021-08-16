@@ -38,7 +38,7 @@ public class SubmitAnswerServlet extends HttpServlet {
         record rec = (record)req.getSession().getAttribute("record");
         rec.setScore(rec.getScore() + mark);
         PrintWriter pw = resp.getWriter();
-        pw.print(answer);
+        pw.print(mark);
         pw.close();
     }
 
