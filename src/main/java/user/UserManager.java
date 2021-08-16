@@ -170,6 +170,9 @@ public class UserManager {
     public static boolean promoteUser(String userName) throws SQLException {
         PreparedStatement statement1 = null;
         PreparedStatement statement2 = null;
+        PreparedStatement statement3 = null;
+        PreparedStatement statement4 = null;
+        PreparedStatement statement5 = null;
         ResultSet rs = null;
         try{
             con = DataSrc.getConnection();
@@ -179,14 +182,25 @@ public class UserManager {
 
             boolean flag = false;
             while(rs.next()){
+                User user = new User(rs.getInt(1) ,rs.getString("userName"), rs.getString("email"), rs.getBoolean("isAdmin"));
+                if(user.isAdmin())return true;
                 flag = true;
                 break;
             }
             if(!flag)return false;
-
             statement2 = con.prepareStatement("update users set isAdmin = 1 where userName = ?;");
             statement2.setString(1,userName);
             statement2.executeUpdate();
+            statement3 = con.prepareStatement("delete from friendshipRequests where requestorUsername = ?");
+            statement3.setString(1,userName);
+            statement3.executeUpdate();
+            statement4 = con.prepareStatement("delete from friendshipRequests where requesteeUsername = ? ");
+            statement4.setString(1,userName);
+            statement4.executeUpdate();
+            statement5 = con.prepareStatement("delete from userFriendships where username1 = ? or username2 = ?");
+            statement5.setString(1,userName);
+            statement5.setString(2,userName);
+            statement5.executeUpdate();
         }finally{
             try { if (statement1 != null) statement1.close(); } catch (Exception e) {e.printStackTrace();};
             try { if (statement2 != null) statement2.close(); } catch (Exception e) {e.printStackTrace();};
