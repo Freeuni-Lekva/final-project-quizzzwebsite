@@ -28,7 +28,7 @@ public class multipleChoice implements question{
             String tmName= "checkBox";
             checkBoxes+="<input type=\"checkbox\" class=\""+tmName+"\" value=\""+probableAnswers.get(i)+"\"><label for=\""+tmName+"\">" +" "+probableAnswers.get(i)+"</label><br>";
         }
-        String result="<div id=\"container\">"+ hiddentype +"<h2>"+questionID+". "+"\" \""+questionText+"</h2><br>"+checkBoxes+"</div><br>";
+        String result="<div id=\"container\">"+ hiddentype +"<h2>"+questionID+". "+questionText+"</h2><br>"+checkBoxes+"</div><br>";
         return result;
     }
 

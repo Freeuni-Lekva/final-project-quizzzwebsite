@@ -29,7 +29,7 @@ public class questionResponse implements  question{
             System.out.println(probableAnswers.get(i));
             radioButtons+="<input type=\"radio\" name=\"rad\" class=\""+tmName+"\" value=\""+probableAnswers.get(i)+"\"><label for=\""+tmName+"\">" +" "+probableAnswers.get(i)+"</label><br>";
         }
-        String result="<div class=\"container\">"+hiddentype+"<h2>"+questionID+". "+"\" \""+questionText+"</h2><br>"+radioButtons+"</div><br>";
+        String result="<div class=\"container\">"+hiddentype+"<h2>"+questionID+". "+questionText+"</h2><br>"+radioButtons+"</div><br>";
         return result;
     }
 

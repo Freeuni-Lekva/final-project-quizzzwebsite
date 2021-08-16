@@ -21,7 +21,7 @@ public class fillBlank implements question{
             String tmName= "blank";
             textFields+="<h3>input answer:<input type=\"text\" class=\""+tmName+"\"/></h3><br>";
         }
-        String result="<div class=\"container\">"+ hiddentype +"<h2>"+questionID+". "+"\" \""+questionText+"</h2><br>"+textFields+"</div>";
+        String result="<div class=\"container\">"+ hiddentype +"<h2>"+questionID+". "+questionText+"</h2><br>"+textFields+"</div>";
 
         return result;
     }
